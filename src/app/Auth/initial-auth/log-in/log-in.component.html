@@ -1,0 +1,43 @@
+
+<div class="auth-container">
+    <mat-card class="auth-card">
+        <!-- Header -->
+        <mat-card-header></mat-card-header>
+        <!-- Content -->
+        <mat-card-content>
+            <div [formGroup]="loginForm" fxLayout="column" fxLayoutAlign="center start">
+                <!-- Username -->
+                <mat-form-field class="full-width">
+                    <mat-label>Username</mat-label>
+                    <input matInput
+                        type="text" 
+                        formControlName="username"
+                        required/>
+                    <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+                        Username is required.
+                    </div>
+                </mat-form-field>
+
+                <!-- Password -->
+                <mat-form-field class="full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput
+                        type="password" 
+                        formControlName="password"
+                        required/>
+                    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                        Password is required.
+                    </div>
+                </mat-form-field>
+            </div>
+            
+            <!-- Log In Button -->
+            <button mat-flat-button
+                    class="full-width auth-button"
+                    (click)="onSubmit()">LOG IN
+            </button>
+
+            <p><u class="font-size-12 clickable">Forgot password?</u></p>
+        </mat-card-content>
+    </mat-card>
+</div>

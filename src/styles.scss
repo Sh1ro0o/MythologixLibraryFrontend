@@ -23,6 +23,10 @@ html {
     font-size: 12px;
 }
 
+.margin-top-10 {
+    margin-top: 10px;
+}
+
 
 /* AUTH START */
 
@@ -35,11 +39,10 @@ html {
     .auth-card {
         width: 30%;
         background: $background-default;
-        color: white; /* Optional: ensure text is visible */
-        padding: 16px; /* Optional: adjust padding */
+        color: $text-primary;
+        padding: 16px;
         border: 2px solid $primary-dark;
         box-shadow: 0 0 20px 2px rgba($primary-dark, 0.6);
-        border-radius: 8px; // Optional for softer edges
     }
 
     .auth-button {
@@ -48,3 +51,8 @@ html {
 }
 
 /* AUTH STOP */
+
+.redirect {
+    color: $text-primary;
+    font-size: 12px;
+}

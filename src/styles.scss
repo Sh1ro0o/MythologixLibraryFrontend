@@ -23,6 +23,10 @@ html {
     font-size: 12px;
 }
 
+.margin-top-0 {
+    margin-top: 0;
+}
+
 .margin-top-10 {
     margin-top: 10px;
 }
@@ -31,10 +35,10 @@ html {
 /* AUTH START */
 
 .auth-container {
-    height: 100vh;
+    height: 65vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
 
     .auth-card {
         width: 30%;

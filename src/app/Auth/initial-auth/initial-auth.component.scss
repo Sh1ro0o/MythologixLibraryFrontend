@@ -1,8 +1,19 @@
-.login-background {
+.auth-background {
     width: 100%;
     height: 100vh;
-    background-image: url('../../../Assets/Images/mithologyx-login-background.png');
+    background-image: url('/Images/mithologyx-login-background.png');
     background-size: cover; 
     background-position: center;  
     background-attachment: fixed; 
+}
+
+.logo-container {
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+
+    img {
+        width: 15%;
+    }
 }

@@ -6,16 +6,23 @@
         <!-- Content -->
         <mat-card-content>
             <div [formGroup]="loginForm" fxLayout="column" fxLayoutAlign="center start">
-                <!-- Username -->
+                <!-- Email -->
                 <mat-form-field class="full-width">
-                    <mat-label>Username</mat-label>
+                    <mat-label>Email</mat-label>
                     <input matInput
                         type="text" 
-                        formControlName="username"
+                        formControlName="email"
                         required/>
-                    <mat-error *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
-                        Username is required.
-                    </mat-error>
+                    <!--Mat Error-->
+                    @if (loginForm.get('email')?.touched) {
+                        <!-- Required -->
+                        @if (loginForm.get('email')?.hasError('required')) {
+                            <mat-error>Email is required.</mat-error>
+                        <!-- Invalid -->
+                        } @else if (loginForm.get('email')?.hasError('email')) {
+                            <mat-error>Email is invalid.</mat-error>
+                        }
+                    }
                 </mat-form-field>
 
                 <!-- Password -->

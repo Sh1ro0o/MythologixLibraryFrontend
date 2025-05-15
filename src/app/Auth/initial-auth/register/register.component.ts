@@ -14,6 +14,7 @@ import { stringsMatchValidator } from '../../../Validators/strings-match.validat
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup
+  isPasswordVisible: boolean = false;
   
   constructor(private fb: FormBuilder) { }
 
@@ -38,5 +39,9 @@ export class RegisterComponent implements OnInit {
       console.log('form not submitted');
       this.registerForm.markAllAsTouched();
     }
+  }
+
+  onShowOrHidePassword() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 }

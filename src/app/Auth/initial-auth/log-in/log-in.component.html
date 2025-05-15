@@ -28,12 +28,18 @@
                 <mat-form-field class="full-width margin-top-10">
                     <mat-label>Password</mat-label>
                     <input matInput
-                        type="password" 
+                        [type]="isPasswordVisible ? 'text' : 'password'"  
                         formControlName="password"
                         required/>
-                    @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
-                        <mat-error>Password is required.</mat-error>
+                    @if (isPasswordVisible) {
+                        <mat-icon class="clickable" matSuffix (click)="onShowOrHidePassword()">visibility</mat-icon>
                     }
+                    @else {
+                        <mat-icon class="clickable" matSuffix (click)="onShowOrHidePassword()">visibility_off</mat-icon>
+                    }
+                    <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                        Password is required.
+                    </mat-error>
                 </mat-form-field>
             </div>
             

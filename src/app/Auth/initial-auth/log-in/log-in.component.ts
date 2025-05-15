@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LogInComponent implements OnInit {
   loginForm!: FormGroup;
+  isPasswordVisible: boolean = false;
 
   constructor(private fb: FormBuilder) { }
 
@@ -29,4 +30,7 @@ export class LogInComponent implements OnInit {
     }
   }
 
+  onShowOrHidePassword() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
 }

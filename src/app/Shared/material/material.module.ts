@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
+import { MatCard, MatCardContent, MatCardFooter, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
+
 
 
 
@@ -13,18 +16,22 @@ import {MatButtonModule} from '@angular/material/button';
     MatCardTitle,
     MatCardHeader,
     MatCardContent,
+    MatCardFooter,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
   ],
   exports: [
     MatCard,
     MatCardTitle,
     MatCardHeader,
     MatCardContent,
+    MatCardFooter,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
   ]
 })
 export class MaterialModule { }

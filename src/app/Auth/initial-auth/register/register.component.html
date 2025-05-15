@@ -7,7 +7,6 @@
         <!-- Content -->
         <mat-card-content>
             <div [formGroup]="registerForm" fxLayout="column" fxLayoutAlign="center start">
-                <!-- Username -->
                 <!-- Email -->
                 <mat-form-field class="full-width">
                     <mat-label>Email</mat-label>
@@ -32,7 +31,7 @@
                         formControlName="password"
                         required/>
                     <mat-error *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
-                        Password is required.
+                        Invalid Password.
                     </mat-error>
                 </mat-form-field>
 
@@ -44,14 +43,80 @@
                         formControlName="rePassword"
                         required/>
                     <mat-error *ngIf="registerForm.get('rePassword')?.invalid && registerForm.get('rePassword')?.touched">
-                        Password is required.
+                        Please repeat the password.
                     </mat-error>
                 </mat-form-field>
             </div>
             
+            <!-- Password Check Container-->
+            <div class="password-check-container">
+                <!-- Uppercase check -->
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    @if (registerForm.get('password')?.hasError('noUppercase')) {
+                        <span class="password-error-text material-icons" [fxFlex]="3" aria-label="Invalid">close</span>
+                    }
+                    @else {
+                        <span class="password-success-text material-icons" [fxFlex]="3" aria-label="Valid">done</span>
+                    }
+                    <span class="text-primary font-size-14">Contains at least 1 upper case</span>
+                </div>
+                <!-- Lowercase check -->
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    @if (registerForm.get('password')?.hasError('noLowercase')) {
+                        <span class="password-error-text material-icons" [fxFlex]="3" aria-label="Invalid">close</span>
+                    }
+                    @else {
+                        <span class="password-success-text material-icons" [fxFlex]="3" aria-label="Valid">done</span>
+                    }
+                    <span class="text-primary font-size-14">Contains at least 1 lower case</span>
+                </div>
+                <!-- Digit check -->
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    @if (registerForm.get('password')?.hasError('noDigit')) {
+                        <span class="password-error-text material-icons" [fxFlex]="3" aria-label="Invalid">close</span>
+                    }
+                    @else {
+                        <span class="password-success-text material-icons" [fxFlex]="3" aria-label="Valid">done</span>
+                    }
+                    <span class="text-primary font-size-14">Contains at least 1 digit</span>
+                </div>
+                <!-- Non alphanumeric check -->
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    @if (registerForm.get('password')?.hasError('nonAlphaNumeric')) {
+                        <span class="password-error-text material-icons" [fxFlex]="3" aria-label="Invalid">close</span>
+                    }
+                    @else {
+                        <span class="password-success-text material-icons" [fxFlex]="3" aria-label="Valid">done</span>
+                    }
+                    <span class="text-primary font-size-14">Contains at least 1 non alphanumeric</span>
+                </div>
+                <!-- Password length check -->
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    @if (registerForm.get('password')?.hasError('minlength') || registerForm.get('password')?.hasError('maxlength') || registerForm.get('password')?.hasError('required')) {
+                        <span class="password-error-text material-icons" [fxFlex]="3" aria-label="Invalid">close</span>
+                    }
+                    @else {
+                        <span class="password-success-text material-icons" [fxFlex]="3" aria-label="Valid">done</span>
+                    }
+                    <span class="text-primary font-size-14">Is between 12 - 24 characters</span>
+                </div>
+                <!-- Passwords must match -->
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    @if (registerForm.hasError('stringsMismatch') || registerForm.get('password')?.hasError('required')) {
+                        <span class="password-error-text material-icons" [fxFlex]="3" aria-label="Invalid">close</span>
+                    }
+                    @else {
+                        <span class="password-success-text material-icons" [fxFlex]="3" aria-label="Valid">done</span>
+                    }
+                    <span class="text-primary font-size-14">Passwords must match</span>
+                </div>
+            </div>
+            
             <!-- Log In Button -->
             <button mat-flat-button
+                    color="primary"
                     class="full-width auth-button margin-top-10"
+                    [disabled]="!registerForm.valid"
                     (click)="onSubmit()">SIGN UP
             </button>
 

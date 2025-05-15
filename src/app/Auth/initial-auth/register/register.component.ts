@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { containsNonAlphanumeric } from '../../../Validators/contains-non-alphanumeric.validators';
+import { containsUppercase } from '../../../Validators/contains-upper-case.validators';
+import { containsLowercase } from '../../../Validators/contains-lower-case.validators';
+import { containsDigit } from '../../../Validators/contains-digit.validators';
+import { stringsMatchValidator } from '../../../Validators/strings-match.validators';
 
 @Component({
   selector: 'app-register',
@@ -15,9 +20,14 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(12)]],
+      password: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(24),
+        containsNonAlphanumeric(),containsUppercase(), containsLowercase(), containsDigit()]],
       rePassword: ['', [Validators.required]]
-    });
+    },
+    {
+      validators: stringsMatchValidator('password', 'rePassword')
+    }
+  );
   }
 
   onSubmit(): void {

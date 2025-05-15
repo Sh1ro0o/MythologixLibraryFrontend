@@ -2,6 +2,7 @@
 // === Base brand color ===
 $primary-color: #1469C0;
 $primary-light: #4f94d4;
+$primary-light-dark: #09162a;
 $primary-dark: #0d47a1;
 
 // === Accent ===
@@ -11,7 +12,7 @@ $accent-dark: #007c91;
 
 // === Backgrounds ===
 $background-default: #001833; 
-$background-surface: #1e1e2f; 
+$background-surface: #1e2a3a; 
 $background-hover: #2a2a3a; 
 
 // === Text ===
@@ -23,6 +24,7 @@ $text-disabled: #757575;
 $success-color: #00e676;
 $warning-color: #ffca28;
 $error-color: #ef5350;
+$disabled-color: #DFDEE2;
 
 // === Borders, outlines, dividers ===
 $divider-color: rgba(255, 255, 255, 0.12);

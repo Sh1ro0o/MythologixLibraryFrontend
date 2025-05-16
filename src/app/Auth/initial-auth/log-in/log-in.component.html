@@ -49,6 +49,9 @@
                     (click)="onSubmit()">LOG IN
             </button>
 
+            <!-- Login Error Message -->
+            <p *ngIf="loginFailed" class="text-error">{{ loginMessage }}</p>
+
             <!-- Redirects -->
             <div class="margin-top-10">
                 <a class="redirect">Forgot password?</a>

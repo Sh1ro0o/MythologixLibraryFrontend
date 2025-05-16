@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginRequest } from '../../../Models/Requests/login.request';
+import { AuthService } from '../../../Services/auth.service';
+import { LocalStorageService } from '../../../Services/local-storage.service';
+import { LocalStorageKey } from '../../../Shared/Enums/local-storage-key.enum';
+import { LoginResponse } from '../../../Models/Responses/login.response';
 
 @Component({
   selector: 'app-log-in',
@@ -11,7 +16,13 @@ export class LogInComponent implements OnInit {
   loginForm!: FormGroup;
   isPasswordVisible: boolean = false;
 
-  constructor(private fb: FormBuilder) { }
+  loginFailed: boolean = false;
+  loginMessage: string = '';
+
+  constructor(private fb: FormBuilder,
+    private authService: AuthService,
+    private localStorage: LocalStorageService,
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -22,7 +33,25 @@ export class LogInComponent implements OnInit {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      console.log('submitted', this.loginForm.value);
+      let loginRequest: LoginRequest = new LoginRequest();
+      loginRequest.email = this.loginForm.get('email')?.value;
+      loginRequest.password = this.loginForm.get('password')?.value;
+
+      //Log in
+      this.authService.login(loginRequest).subscribe({
+        next: (response: LoginResponse) => {
+          //store token data in local storage
+          this.localStorage.set(LocalStorageKey.Token, response?.data?.token);
+          this.localStorage.set(LocalStorageKey.Expiration, response?.data?.expiresOn);
+
+          //redirect to dashbouard
+          //TO-DO ...
+        },
+        error: (err) => {
+          this.loginFailed = true;
+          this.loginMessage = err?.error?.message || 'Log in failed. Please contact our support for help.';
+        }
+      });
     }
     else {
       console.log('form not submitted');

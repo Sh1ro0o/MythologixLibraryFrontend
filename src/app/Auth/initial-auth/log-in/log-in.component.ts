@@ -5,6 +5,7 @@ import { AuthService } from '../../../Services/auth.service';
 import { LocalStorageService } from '../../../Services/local-storage.service';
 import { LocalStorageKey } from '../../../Shared/Enums/local-storage-key.enum';
 import { LoginResponse } from '../../../Models/Responses/login.response';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -22,6 +23,7 @@ export class LogInComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private localStorage: LocalStorageService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class LogInComponent implements OnInit {
           this.localStorage.set(LocalStorageKey.Expiration, response?.data?.expiresOn);
 
           //redirect to dashbouard
-          //TO-DO ...
+          this.router.navigate(['dashboard']);
         },
         error: (err) => {
           this.loginFailed = true;

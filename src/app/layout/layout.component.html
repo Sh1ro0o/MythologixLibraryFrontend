@@ -1,0 +1,25 @@
+<!-- Toolbar -->
+<mat-toolbar class="toolbar">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon class="text-primary" (click)="drawer.toggle()">menu</mat-icon>
+  </button>
+  <!-- Banner image -->
+  <img class='banner-image' src="/Images/mythologix_banner.png"/>
+  <span class="spacer"></span>
+</mat-toolbar>
+
+<!-- Main -->
+<mat-drawer-container>
+    <!-- Sidebar -->
+    <mat-drawer #drawer class="sidebar sidebar-default-mode" mode="side" [opened]="true">
+        <app-side-bar></app-side-bar>
+    </mat-drawer>
+
+    <!-- Component rendering -->
+    <mat-drawer-content>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+

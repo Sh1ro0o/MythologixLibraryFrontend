@@ -1,0 +1,23 @@
+@use '../../Assets/Styles/variables' as *;
+
+.toolbar {
+    background-color: $background-default;
+}
+
+.sidebar {
+    background-color: $background-default;
+    border-radius: 0px;
+}
+
+.sidebar-default-mode {
+  width: 300px;
+}
+
+.sidebar.mini-mode {
+  width: 60px;
+}
+
+.banner-image {
+    width: 300px;
+    padding-left: 15px;
+}

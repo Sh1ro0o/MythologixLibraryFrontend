@@ -6,10 +6,11 @@ import { HTTP_INTERCEPTORS, HttpClientModule, } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -17,6 +18,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    LayoutModule,
   ],
   providers: [
     {

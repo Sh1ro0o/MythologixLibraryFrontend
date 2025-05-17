@@ -1,10 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
-  //Standard loading
-  { path: 'dashboard', component: DashboardComponent },
+  //Layout
+  {
+    path: '', 
+    component: LayoutComponent,
+    children: [
+      //{ path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+      //{ path: 'books', loadChildren: () => import('./books/books.module').then(m => m.BooksModule) },  // lazy loaded inside layout wrapper
+      { path: 'dashboard', component: DashboardComponent },
+    ]
+  },
 
   //Lazy loading
   { path: 'auth', loadChildren: () => import('./Auth/auth.module').then(m => m.AuthModule) },

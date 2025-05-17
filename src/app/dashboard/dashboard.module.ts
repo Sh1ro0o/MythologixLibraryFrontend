@@ -16,4 +16,4 @@ import { DashboardComponent } from "./dashboard.component";
         FlexLayoutModule,
     ]
   })
-  export class AuthModule {}
+  export class DashboardModule {}

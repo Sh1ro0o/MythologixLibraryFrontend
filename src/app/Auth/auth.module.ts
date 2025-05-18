@@ -7,6 +7,7 @@ import { AuthRoutingModule } from "./auth-routing.module";
 import { MaterialModule } from "../Shared/material/material.module";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { InitialAuthComponent } from './initial-auth/initial-auth.component';
+import { SharedModule } from "../Shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { InitialAuthComponent } from './initial-auth/initial-auth.component';
         AuthRoutingModule, //Routes
         MaterialModule,
         FlexLayoutModule,
+        SharedModule
     ]
   })
   export class AuthModule {}

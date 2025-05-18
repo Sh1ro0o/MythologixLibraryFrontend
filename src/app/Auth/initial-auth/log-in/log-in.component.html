@@ -1,6 +1,6 @@
 
 <div class="auth-container">
-    <mat-card class="auth-card">
+    <mat-card class="auth-card" [appLoadingCircle]="loadingService.loading$ | async">
         <!-- Header -->
         <mat-card-header>
             <h2 class="margin-top-0">LOG IN</h2>

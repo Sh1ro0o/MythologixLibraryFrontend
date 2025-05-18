@@ -66,7 +66,7 @@ html {
     }
 }
 
-/* AUTH STOP */
+/* AUTH END */
 
 .redirect {
     color: $text-primary;
@@ -85,3 +85,34 @@ button[disabled] {
 .spacer {
   flex: 1 1 auto;
 }
+
+/* Loading Circle START */
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $background-spinner;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+}
+
+.spinner {
+  border: 6px solid $spinner-border-color;
+  border-top: 6px solid $primary-color;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Loading Circle END */

@@ -7,10 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { LayoutModule } from './layout/layout.module';
+import { SharedModule } from './Shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -19,6 +20,7 @@ import { LayoutModule } from './layout/layout.module';
     AppRoutingModule,
     FormsModule,
     LayoutModule,
+    SharedModule,
   ],
   providers: [
     {

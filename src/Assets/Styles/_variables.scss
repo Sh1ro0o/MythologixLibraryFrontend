@@ -12,8 +12,9 @@ $accent-dark: #007c91;
 
 // === Backgrounds ===
 $background-default: #001833; 
-$background-surface: #1e2a3a; 
-$background-hover: #2a2a3a; 
+$background-surface: #00254e; 
+$background-hover: #2a2a3a;
+$background-spinner: rgba(5, 5, 5, 0.7);
 
 // === Text ===
 $text-primary: #ffffff;
@@ -28,3 +29,4 @@ $disabled-color: #DFDEE2;
 
 // === Borders, outlines, dividers ===
 $divider-color: rgba(255, 255, 255, 0.12);
+$spinner-border-color: #ccc;

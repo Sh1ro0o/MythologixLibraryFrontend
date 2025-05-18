@@ -1,12 +1,23 @@
 @use '../../Assets/Styles/variables' as *;
 
+.layout-wrapper {
+  height: 100%
+}
+
 .toolbar {
-    background-color: $background-default;
+  background-color: $background-default;
+}
+
+.main-content {
+  padding-top: 5px;
+  background-color: $background-default;
+  height: 100%;
 }
 
 .sidebar {
-    background-color: $background-default;
-    border-radius: 0px;
+  border-radius: 0px;
+  background-color: $background-default;
+  padding-top: 5px;
 }
 
 .sidebar-default-mode {

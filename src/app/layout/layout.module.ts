@@ -18,6 +18,6 @@ import { RouterModule } from "@angular/router";
     MaterialModule,
     FlexLayoutModule,
     RouterModule
-  ]
+]
 })
 export class LayoutModule {}

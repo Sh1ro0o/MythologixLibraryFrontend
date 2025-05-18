@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginRequest } from '../../../Models/Requests/login.request';
 import { AuthService } from '../../../Services/auth.service';
@@ -6,6 +6,9 @@ import { LocalStorageService } from '../../../Services/local-storage.service';
 import { LocalStorageKey } from '../../../Shared/Enums/local-storage-key.enum';
 import { LoginResponse } from '../../../Models/Responses/login.response';
 import { Router } from '@angular/router';
+import { LoadingService } from '../../../Services/loading.service';
+import { withLoading } from '../../../core/operators/with-loading.operator';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-log-in',
@@ -24,6 +27,8 @@ export class LogInComponent implements OnInit {
     private authService: AuthService,
     private localStorage: LocalStorageService,
     private router: Router,
+    public loadingService: LoadingService,
+    private destroyRef: DestroyRef
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +45,10 @@ export class LogInComponent implements OnInit {
       loginRequest.password = this.loginForm.get('password')?.value;
 
       //Log in
-      this.authService.login(loginRequest).subscribe({
+      this.authService.login(loginRequest).pipe(
+        withLoading(this.loadingService),
+        takeUntilDestroyed(this.destroyRef)
+      ).subscribe({
         next: (response: LoginResponse) => {
           //store token data in local storage
           this.localStorage.set(LocalStorageKey.Token, response?.data?.token);

@@ -1,25 +1,30 @@
 <!-- Toolbar -->
-<mat-toolbar class="toolbar">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon class="text-primary" (click)="drawer.toggle()">menu</mat-icon>
-  </button>
-  <!-- Banner image -->
-  <img class='banner-image' src="/Images/mythologix_banner.png"/>
-  <span class="spacer"></span>
-</mat-toolbar>
+<div class="layout-wrapper" fxLayout="column">
+  <mat-toolbar class="toolbar">
+    <button mat-icon-button class="example-icon" 
+            aria-label="Example icon-button with menu icon"
+            (click)="drawer.toggle()">
+      <mat-icon class="text-primary">menu</mat-icon>
+    </button>
+    <!-- Banner image -->
+    <img class='banner-image clickable' 
+        src="/Images/mythologix_banner.png"
+        routerLink="dashboard"/>
+    <span class="spacer"></span>
+  </mat-toolbar>
+  <!-- Main Content -->
+  <mat-drawer-container class="main-content">
+      <!-- Sidebar -->
+      <mat-drawer #drawer class="sidebar sidebar-default-mode" mode="side" [opened]="true">
+          <app-side-bar></app-side-bar>
+      </mat-drawer>
 
-<!-- Main -->
-<mat-drawer-container>
-    <!-- Sidebar -->
-    <mat-drawer #drawer class="sidebar sidebar-default-mode" mode="side" [opened]="true">
-        <app-side-bar></app-side-bar>
-    </mat-drawer>
-
-    <!-- Component rendering -->
-    <mat-drawer-content>
-        <div>
-            <router-outlet></router-outlet>
-        </div>
-    </mat-drawer-content>
-</mat-drawer-container>
+      <!-- Component rendering -->
+      <mat-drawer-content>
+          <div>
+              <router-outlet></router-outlet>
+          </div>
+      </mat-drawer-content>
+  </mat-drawer-container>
+</div>
 

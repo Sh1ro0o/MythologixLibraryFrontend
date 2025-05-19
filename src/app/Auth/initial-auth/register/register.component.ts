@@ -5,6 +5,8 @@ import { containsUppercase } from '../../../Validators/contains-upper-case.valid
 import { containsLowercase } from '../../../Validators/contains-lower-case.validators';
 import { containsDigit } from '../../../Validators/contains-digit.validators';
 import { stringsMatchValidator } from '../../../Validators/strings-match.validators';
+import { ROUTES } from '../../../shared/constants/routes';
+
 
 @Component({
   selector: 'app-register',
@@ -15,6 +17,8 @@ import { stringsMatchValidator } from '../../../Validators/strings-match.validat
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup
   isPasswordVisible: boolean = false;
+
+  routes = ROUTES;
   
   constructor(private fb: FormBuilder) { }
 

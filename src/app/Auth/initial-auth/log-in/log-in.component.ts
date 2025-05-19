@@ -1,14 +1,15 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginRequest } from '../../../Models/Requests/login.request';
-import { AuthService } from '../../../Services/auth.service';
-import { LocalStorageService } from '../../../Services/local-storage.service';
-import { LocalStorageKey } from '../../../Shared/Enums/local-storage-key.enum';
+import { AuthService } from '../../../services/auth.service';
+import { LocalStorageService } from '../../../services/local-storage.service';
+import { LocalStorageKey } from '../../../shared/Enums/local-storage-key.enum';
 import { LoginResponse } from '../../../Models/Responses/login.response';
 import { Router } from '@angular/router';
-import { LoadingService } from '../../../Services/loading.service';
+import { LoadingService } from '../../../services/loading.service';
 import { withLoading } from '../../../core/operators/with-loading.operator';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ROUTES } from '../../../shared/constants/routes';
 
 @Component({
   selector: 'app-log-in',
@@ -22,6 +23,8 @@ export class LogInComponent implements OnInit {
 
   loginFailed: boolean = false;
   loginMessage: string = '';
+
+  routes = ROUTES;
 
   constructor(private fb: FormBuilder,
     private authService: AuthService,

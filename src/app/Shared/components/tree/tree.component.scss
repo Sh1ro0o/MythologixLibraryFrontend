@@ -1,0 +1,19 @@
+@use '../../../../assets/styles/variables' as *;
+
+.tree-list-parent {
+    list-style: none;
+    margin: 0;
+    padding-top: 15px;
+}
+
+.tree-list-child {
+    color: $text-secondary;
+
+    :hover {
+        color: #9BCBFF;
+    }
+}
+
+.list-name {
+    padding-top: 3px;
+}

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoadingService } from '../services/loading.service';
 import { ROUTES } from '../shared/constants/routes';
 
 
@@ -13,16 +11,9 @@ import { ROUTES } from '../shared/constants/routes';
 export class LayoutComponent implements OnInit {
   routes = ROUTES;
 
-  constructor(private router: Router,
-              private loadingService: LoadingService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.loadingService.loading$.subscribe({
-      next: (isLoading) => {
-        console.log(isLoading);
-      }
-    })
 
-    this.loadingService.hide();
   }
 }

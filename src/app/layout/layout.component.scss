@@ -1,4 +1,4 @@
-@use '../../Assets/Styles/variables' as *;
+@use '../../assets/styles/variables' as *;
 
 .layout-wrapper {
   height: 100%;
@@ -10,7 +10,6 @@
 }
 
 .main-content {
-  margin-top: 30px;
   background-color: $background-default;
   height: 100%;
 }
@@ -18,15 +17,21 @@
 .sidebar {
   border-radius: 0px;
   background-color: $background-default;
-  padding-top: 5px;
+  padding-top: 0;
+  margin-top: 15px;
 }
 
 .sidebar-default-mode {
-  width: 300px;
+  width: 225px;
 }
 
 .sidebar.mini-mode {
   width: 60px;
+}
+
+.component-content-container {
+  margin-top: 30px;
+  margin-left: 15px;
 }
 
 .banner-image {

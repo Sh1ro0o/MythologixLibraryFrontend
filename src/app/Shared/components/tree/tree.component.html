@@ -1,0 +1,30 @@
+@for (node of treeData; track $index) {
+    <ul class="tree-list-parent">
+        <!--Render parent-->
+        <li class="tree-list-child">
+            <div fxLayout="row" 
+                 fxLayoutAlign="start start" 
+                 class="clickable"
+                 (click)="toggleNode($index)"
+                 [routerLink]="node?.route">
+                <mat-icon class="text-secondary">{{ node?.icon }}</mat-icon>
+                <div fxFlex="5"></div>
+                <div class="list-name" [ngClass]="node?.children ? 'bold' : ''">{{ node?.name }}</div>
+                <div fxFlex></div>
+                @if (node?.children) {
+                    @if (isExpanded($index)) {
+                        <mat-icon class="margin-right-15">keyboard_arrow_down</mat-icon>
+                    }
+                    @else {
+                        <mat-icon class="margin-right-15">chevron_right</mat-icon>
+                    }
+                }
+            </div>
+        </li>
+
+        <!--Render children-->
+        @if (node?.children && isExpanded($index)) {
+            <app-tree [treeData]="node.children!"></app-tree>
+        }
+    </ul>
+}

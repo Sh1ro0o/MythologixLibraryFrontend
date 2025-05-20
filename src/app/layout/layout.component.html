@@ -4,7 +4,7 @@
     <button mat-icon-button class="example-icon" 
             aria-label="Example icon-button with menu icon"
             (click)="drawer.toggle()">
-      <mat-icon class="text-primary">menu</mat-icon>
+      <mat-icon class="text-secondary">menu</mat-icon>
     </button>
     <!-- Banner image -->
     <img class='banner-image clickable' 
@@ -20,7 +20,7 @@
       </mat-drawer>
 
       <!-- Component rendering -->
-      <mat-drawer-content>
+      <mat-drawer-content class="component-content-container">
           <div>
               <router-outlet></router-outlet>
           </div>

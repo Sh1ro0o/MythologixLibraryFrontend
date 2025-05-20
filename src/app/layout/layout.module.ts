@@ -6,6 +6,7 @@ import { MaterialModule } from "../shared/modules/material.module";
 import { LayoutComponent } from "./layout.component";
 import { SideBarComponent } from "./side-bar/side-bar.component";
 import { RouterModule } from "@angular/router";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RouterModule } from "@angular/router";
     ReactiveFormsModule,
     MaterialModule,
     FlexLayoutModule,
-    RouterModule
+    RouterModule,
+    SharedModule
 ]
 })
 export class LayoutModule {}

@@ -8,6 +8,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [],
@@ -25,6 +28,11 @@ import { MatTreeModule } from '@angular/material/tree';
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatTreeModule,
+    MatPaginator,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSort,
+    MatSortModule,
   ],
   exports: [
     MatCard,
@@ -40,6 +48,11 @@ import { MatTreeModule } from '@angular/material/tree';
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatTreeModule,
+    MatPaginator,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSort,
+    MatSortModule,
   ]
 })
 export class MaterialModule { }

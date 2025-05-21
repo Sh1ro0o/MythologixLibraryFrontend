@@ -57,7 +57,6 @@ html {
 
 
 /* AUTH START */
-
 .auth-container {
     height: 65vh;
     display: flex;
@@ -77,7 +76,6 @@ html {
         height: 50px;
     }
 }
-
 /* AUTH END */
 
 .redirect {
@@ -99,7 +97,6 @@ button[disabled] {
 }
 
 /* Loading Circle START */
-
 .overlay {
   position: absolute;
   top: 0;
@@ -126,5 +123,4 @@ button[disabled] {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
-
 /* Loading Circle END */

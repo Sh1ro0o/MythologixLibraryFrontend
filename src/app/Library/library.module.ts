@@ -6,10 +6,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from "../shared/shared.module";
 import { BooksComponent } from "./books/books.component";
 import { LibraryRoutingModule } from "./library-routing.module";
+import { AuthorsComponent } from './authors/authors.component';
 
 @NgModule({
     declarations: [
         BooksComponent,
+        AuthorsComponent,
     ],
     imports: [
         CommonModule,

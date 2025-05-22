@@ -107,6 +107,14 @@ button[disabled] {
   flex: 1 1 auto;
 }
 
+.w-20 {
+  width: 20%;
+}
+
+.w-25 {
+  width: 25%;
+}
+
 /* Loading Circle START */
 .overlay {
   position: absolute;
@@ -176,10 +184,14 @@ button[disabled] {
 }
 
 .mat-mdc-paginator-icon {
-  fill: $primary-color !important;
+  fill: $text-secondary !important;
 }
 
 .mat-mdc-button-disabled .mat-mdc-paginator-icon {
   fill: $text-disabled !important;
+}
+
+.mat-sort-header-arrow svg {
+  fill: $text-secondary !important;
 }
 /* Custom Mat Table styling overwrite END */

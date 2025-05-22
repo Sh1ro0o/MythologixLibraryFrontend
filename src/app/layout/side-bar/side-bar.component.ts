@@ -25,7 +25,7 @@ const NAV_DATA: TreeNodeData[] = [
       {
         name: 'Authors',
         icon: 'badge',
-        route: ROUTES.REGISTER
+        route: ROUTES.AUTHORS
       },
       {
         name: 'Genres',

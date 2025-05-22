@@ -6,6 +6,8 @@ import { Observable } from "rxjs";
 import { toHttpParams } from "../shared/utils/http-utils";
 import { BookData } from "../Models/data/book-data";
 import { ResponseData } from "../Models/Responses/response-data";
+import { GetAuthorsRequest } from "../Models/Requests/get.authors.request";
+import { AuthorData } from "../Models/data/author-data";
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +19,10 @@ export class LibraryService {
   constructor(private http: HttpClient) { }
 
   getBooks(getBookRequest: GetBooksRequest): Observable<ResponseData<BookData[]>> {
-    return this.http.get<ResponseData<BookData[]>>(this.apiUrl + '/Book/allBooks', { params: toHttpParams(getBookRequest)});
+    return this.http.get<ResponseData<BookData[]>>(this.apiUrl + '/Book/allBooks', {params: toHttpParams(getBookRequest)});
+  }
+
+  getAuthors(getAuthorRequest: GetAuthorsRequest): Observable<ResponseData<AuthorData[]>> {
+    return this.http.get<ResponseData<AuthorData[]>>(this.apiUrl + '/Author/allAuthors', {params: toHttpParams(getAuthorRequest)});
   }
 }

@@ -73,11 +73,11 @@ export class BooksComponent implements OnInit {
   }
 
   getAuthors(authors: AuthorData[]) {
-    return authors.map(author => `${author.firstName} ${author.lastName}`).join(' ');
+    return authors.map(author => `${author.firstName} ${author.lastName}`).join(', ');
   }
 
   getGenres(genres: GenreData[]) {
-    return genres.map(genre => genre.name).join(' ');
+    return genres.map(genre => genre.name).join(', ');
   }
 
   //pagination

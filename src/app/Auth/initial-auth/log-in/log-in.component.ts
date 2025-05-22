@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit } from '@angular/core';
+import { Component, DestroyRef, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginRequest } from '../../../Models/Requests/login.request';
 import { AuthService } from '../../../services/auth.service';
@@ -10,7 +10,7 @@ import { withLoading } from '../../../core/operators/with-loading.operator';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ROUTES } from '../../../shared/constants/routes';
 import { ResponseData } from '../../../Models/Responses/response-data';
-import { LoginData } from '../../../Models/data/login-data';
+import { AuthData } from '../../../Models/data/auth-data';
 
 @Component({
   selector: 'app-log-in',
@@ -53,7 +53,7 @@ export class LogInComponent implements OnInit {
         withLoading(this.loadingService),
         takeUntilDestroyed(this.destroyRef)
       ).subscribe({
-        next: (response: ResponseData<LoginData>) => {
+        next: (response: ResponseData<AuthData>) => {
           //store token data in local storage
           this.localStorage.set(LocalStorageKey.Token, response?.data?.token);
           this.localStorage.set(LocalStorageKey.Expiration, response?.data?.expiresOn);
@@ -75,5 +75,11 @@ export class LogInComponent implements OnInit {
 
   onShowOrHidePassword() {
     this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  //Enter key pressed submit form
+  @HostListener('window:keydown.enter', ['$event'])
+  handleEnterKey(event: KeyboardEvent) {
+    this.onSubmit();
   }
 }

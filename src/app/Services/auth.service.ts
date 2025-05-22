@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { LocalStorageKey } from '../shared/Enums/local-storage-key.enum';
 import { ResponseData } from '../Models/Responses/response-data';
-import { LoginData } from '../Models/data/login-data';
+import { AuthData } from '../Models/data/auth-data';
+import { RegisterRequest } from '../Models/Requests/register.request';
 
 @Injectable({
   providedIn: 'root',
@@ -20,17 +21,23 @@ export class AuthService {
               private localStorage: LocalStorageService,
   ) { }
 
-  login(loginRequest: LoginRequest) : Observable<ResponseData<LoginData>> {
-      return this.http.post<ResponseData<LoginData>>(this.apiUrl + '/User/Login', loginRequest);
+  //Log in
+  login(loginRequest: LoginRequest) : Observable<ResponseData<AuthData>> {
+    return this.http.post<ResponseData<AuthData>>(this.apiUrl + '/User/Login', loginRequest);
   }
 
   isLoggedIn(): boolean {
-      let expiresOn: Date | null = this.localStorage.get<Date>(LocalStorageKey.Expiration);
+    let expiresOn: Date | null = this.localStorage.get<Date>(LocalStorageKey.Expiration);
 
-      if(expiresOn) {
-        return expiresOn.getTime() > Date.now();
-      }
-      
-      return false;
+    if(expiresOn) {
+      return expiresOn.getTime() > Date.now();
+    }
+    
+    return false;
+  }
+
+  //Register
+  register(registerRequest: RegisterRequest): Observable<ResponseData<AuthData>> {
+    return this.http.post<ResponseData<AuthData>>(this.apiUrl + '/User/Register', registerRequest);
   }
 }

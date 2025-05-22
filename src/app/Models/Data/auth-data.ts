@@ -1,4 +1,4 @@
-export interface LoginData {
+export interface AuthData {
     email: string;
     token: string;
     expiresOn: Date;

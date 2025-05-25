@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { BooksComponent } from "./books/books.component";
 import { AuthorsComponent } from "./authors/authors.component";
+import { GenresComponent } from "./genres/genres.component";
 
 const libraryRoutes: Routes = [
   {
@@ -19,6 +20,10 @@ const libraryRoutes: Routes = [
       {
         path: 'authors', 
         component: AuthorsComponent 
+      },
+      {
+        path: 'genres', 
+        component: GenresComponent 
       }
     ]
   },

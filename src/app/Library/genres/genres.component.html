@@ -1,17 +1,17 @@
 <div class="main-content-wrapper">
-  <h1 class="text-primary margin-top-0">AUTHORS</h1>
+  <h1 class="text-primary margin-top-0">GENRES</h1>
   <div class="table-wrapper">
-    <table mat-table [dataSource]="authorsDataSource" matSort>
+    <table mat-table [dataSource]="genresDataSource" matSort>
       <!-- First Name Column -->
-      <ng-container matColumnDef="firstName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 250px"> First Name </th>
-        <td mat-cell *matCellDef="let row" style="width: 250px"> {{ row.firstName }} </td>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 250px"> Name </th>
+        <td mat-cell *matCellDef="let row" style="width: 250px"> {{ row.name }} </td>
       </ng-container>
 
       <!-- Last Name Column -->
-      <ng-container matColumnDef="lastName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
-        <td mat-cell *matCellDef="let row"> {{ row.lastName }} </td>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+        <td mat-cell *matCellDef="let row"> {{ row.description }} </td>
       </ng-container>
       
       <tr style="font-weight: bolder;" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -24,7 +24,7 @@
       [length]="length"
       [pageSize]="pageSize"
       [showFirstLastButtons]="true"
-      aria-label="Select page of authors"
+      aria-label="Select page of genres"
       (page)="handlePageEvent($event)"></mat-paginator>
   </div>
 </div>

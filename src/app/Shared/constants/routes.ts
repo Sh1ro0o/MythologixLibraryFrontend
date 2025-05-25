@@ -3,5 +3,6 @@ export const ROUTES = {
     REGISTER: '/auth/register',
     DASHBOARD: '/dashboard',
     BOOKS: 'library/books',
-    AUTHORS: 'library/authors'
+    AUTHORS: 'library/authors',
+    GENRES: 'library/genres'
 }

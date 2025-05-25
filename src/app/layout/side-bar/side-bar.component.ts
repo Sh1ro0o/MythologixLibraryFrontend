@@ -30,7 +30,7 @@ const NAV_DATA: TreeNodeData[] = [
       {
         name: 'Genres',
         icon: 'lists',
-        route: ROUTES.REGISTER
+        route: ROUTES.GENRES
       }
     ]
   },

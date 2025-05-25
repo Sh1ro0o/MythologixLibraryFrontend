@@ -8,6 +8,8 @@ import { BookData } from "../Models/data/book-data";
 import { ResponseData } from "../Models/Responses/response-data";
 import { GetAuthorsRequest } from "../Models/Requests/get.authors.request";
 import { AuthorData } from "../Models/data/author-data";
+import { GetGenresRequest } from "../Models/Requests/get.genres.request";
+import { GenreData } from "../Models/data/genre-data";
 
 @Injectable({
   providedIn: 'root',
@@ -24,5 +26,9 @@ export class LibraryService {
 
   getAuthors(getAuthorRequest: GetAuthorsRequest): Observable<ResponseData<AuthorData[]>> {
     return this.http.get<ResponseData<AuthorData[]>>(this.apiUrl + '/Author/allAuthors', {params: toHttpParams(getAuthorRequest)});
+  }
+
+  getGenres(getGenreRequest: GetGenresRequest): Observable<ResponseData<GenreData[]>> {
+    return this.http.get<ResponseData<GenreData[]>>(this.apiUrl + '/Genre/allGenres', {params: toHttpParams(getGenreRequest)});
   }
 }

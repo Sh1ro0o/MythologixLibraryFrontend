@@ -7,11 +7,13 @@ import { SharedModule } from "../shared/shared.module";
 import { BooksComponent } from "./books/books.component";
 import { LibraryRoutingModule } from "./library-routing.module";
 import { AuthorsComponent } from './authors/authors.component';
+import { GenresComponent } from './genres/genres.component';
 
 @NgModule({
     declarations: [
         BooksComponent,
         AuthorsComponent,
+        GenresComponent,
     ],
     imports: [
         CommonModule,

@@ -19,9 +19,9 @@ import { ResponseData } from '../../Models/Responses/response-data';
 })
 export class AuthorsComponent implements OnInit {
   //data
-  books: AuthorData[] = [];
+  authors: AuthorData[] = [];
   //angular material table data
-  booksDataSource: MatTableDataSource<BookData, MatPaginator> = new MatTableDataSource();
+  authorsDataSource: MatTableDataSource<BookData, MatPaginator> = new MatTableDataSource();
   displayedColumns: string[] = ['firstName', 'lastName'];
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -51,17 +51,17 @@ export class AuthorsComponent implements OnInit {
       withLoading(this.loadingService),
       takeUntilDestroyed(this.destroyRef)
     ).subscribe({
-      next: (booksData: ResponseData<AuthorData[]>) => {
-        if (booksData.data) {
+      next: (authorsData: ResponseData<AuthorData[]>) => {
+        if (authorsData.data) {
           //Assign data
-          this.books = booksData?.data;
-          this.booksDataSource = new MatTableDataSource(booksData.data);
+          this.authors = authorsData?.data;
+          this.authorsDataSource = new MatTableDataSource(authorsData.data);
 
           //total pages length
-          this.length = booksData.totalCount ?? 0;
+          this.length = authorsData.totalCount ?? 0;
 
           //descending/ascending filtering
-          this.booksDataSource.sort = this.sort;
+          this.authorsDataSource.sort = this.sort;
         }
       },
       error: (err) => {

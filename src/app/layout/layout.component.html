@@ -11,6 +11,18 @@
         src="/Images/mythologix_banner.png"
         [routerLink]="routes.DASHBOARD"/>
     <span class="spacer"></span>
+    <!-- Account icon -->
+    <mat-icon class="text-secondary bigger-icon clickable"
+              [matMenuTriggerFor]="accoutMenu">account_circle</mat-icon>
+    <!-- Account menu -->
+    <mat-menu #accoutMenu="matMenu">
+      <!-- Logout -->
+      <button mat-menu-item
+              (click)="onLogout()">
+        <mat-icon>logout</mat-icon>
+        <span class="text-primary">Log Out</span>
+      </button>
+    </mat-menu>
   </mat-toolbar>
   <!-- Main Content -->
   <mat-drawer-container class="main-content">

@@ -38,3 +38,17 @@
     width: 300px;
     padding-left: 15px;
 }
+
+.bigger-icon {
+  transform: scale(1.5);
+}
+
+//Mat menu style
+::ng-deep .mat-mdc-menu-content {
+  background: $background-menu !important;
+  color: $text-secondary !important;
+}
+
+::ng-deep .mat-mdc-menu-item mat-icon {
+  color: $text-primary !important;
+}

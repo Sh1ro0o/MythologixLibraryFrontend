@@ -94,6 +94,10 @@ html {
     font-size: 12px;
 }
 
+.spacer {
+  flex: 1 1 auto;
+}
+
 /* DISABLED BUTTONS STYLING DUE TO ANGULAR MATERIAL BUG */
 button[disabled] {
   background-color: $disabled-color !important;

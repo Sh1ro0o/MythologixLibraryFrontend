@@ -1,6 +1,9 @@
 <div class="main-content-wrapper">
   <h1 class="text-primary margin-top-0">GENRES</h1>
-  <div class="table-wrapper">
+  <!-- Filter -->
+  <app-filter [filterData]="genresFilterData" (applyFilters)="filterDataEvent($event)"></app-filter>
+
+  <div class="table-wrapper margin-top-10">
     <table mat-table [dataSource]="genresDataSource" matSort>
       <!-- First Name Column -->
       <ng-container matColumnDef="name">

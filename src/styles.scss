@@ -40,7 +40,11 @@ html {
 }
 
 .margin-0 {
-  margin: 0;
+  margin: 0 !important;
+}
+
+.margin-5 {
+  margin: 5px;
 }
 
 .margin-top-0 {
@@ -57,6 +61,10 @@ html {
 
 .margin-right-5 {
   margin-right: 5px;
+}
+
+.margin-bot-20 {
+  margin-bottom: 20px;
 }
 
 .bold {
@@ -162,12 +170,12 @@ button[disabled] {
 }
 
 .mat-mdc-cell {
-  color: #E5E5E5 !important;
+  color: $text-primary !important;
 }
 
 .mat-sort-header {
 	background-color: $background-table-header !important;
-	color: #E0E1DD !important;
+	color: $text-secondary !important;
 }
 
 .table-wrapper {
@@ -180,11 +188,11 @@ button[disabled] {
 
 .mat-mdc-paginator-container {
 	background-color: $background-table-header !important;
-  color: #E0E1DD !important;
+  color: $text-primary !important;
 }
 
 .mat-mdc-select-value {
-  color: #E0E1DD !important;
+  color: $text-primary !important;
 }
 
 .mat-mdc-paginator-icon {
@@ -199,3 +207,13 @@ button[disabled] {
   fill: $text-secondary !important;
 }
 /* Custom Mat Table styling overwrite END */
+
+.filtering-button {
+  border: 3px solid $background-menu !important;
+  background: $background-menu !important;
+}
+
+.filtering-button-active {
+  border: 3px solid $divider-color !important;
+  background: $background-active !important;
+}

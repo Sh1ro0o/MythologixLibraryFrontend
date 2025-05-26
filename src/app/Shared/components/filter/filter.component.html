@@ -1,0 +1,81 @@
+<div>
+	<!-- Filter button-->
+	<button mat-button 
+					[ngClass]="isFiltering ? 'filtering-button-active' : 'filtering-button'"
+					(click)="isFiltering = !isFiltering"
+					matTooltip="Filter books"
+					[matTooltipPosition]="'right'">
+		<mat-icon class="text-primary margin-0">tune</mat-icon>
+	</button>
+
+	<!-- Filter options -->
+	@if (isFiltering) {
+		<mat-card class="margin-top-10 filters-container">
+			<mat-card-content fxLayout="row wrap" fxLayoutGap="50px" fxLayoutAlign="start center">
+				@for (filterItem of localFilters(); track $index) {
+					@switch (filterItem.type) {
+						<!-- String filter -->
+						@case (filterTypeEnum.String) {
+							<div fxLayout="column" 
+								 fxLayoutAlign="center start">
+								<label class="filter-label">{{ filterItem.name }}:</label>
+								<input class="filter-input margin-bot-20"
+									   	 type="text" 
+									   	 [formControl]="filterItem.control"/>
+							</div>
+						}
+						<!-- Date Filter -->
+						@case (filterTypeEnum.Date) {
+							<div fxLayout="column" 
+								 fxLayoutAlign="center start">
+								<label class="filter-label">{{ filterItem.name }}:</label>
+								<input class="filter-input margin-bot-20"
+											 type="date"
+											 [formControl]="filterItem.control"/>
+							</div>
+						}
+						<!-- Object filtering -->
+						@case (filterTypeEnum.Object) {
+							<div>Object</div>
+						}
+					}
+				}
+			</mat-card-content>
+			<mat-card-footer>
+				<!-- Apply filters -->
+				<div fxLayout="row" fxLayoutAlign="start end">
+					<button mat-button
+									class="filtering-button margin-5"
+									style="margin-left: 15px; height: 30px;"
+									(click)="onApplyFilters()"
+									matTooltip="Apply filters"
+									[matTooltipPosition]="'left'"><span class="text-primary">Apply</span>
+					</button>
+				
+				<!-- Clear filters -->
+					<button mat-button
+									class="reset-button margin-5"
+									style="margin-left: 15px; height: 30px;"
+									(click)="onResetFilters()"
+									matTooltip="Reset filters"
+									[matTooltipPosition]="'right'"><span class="text-primary">Reset</span>
+					</button>
+				</div>
+			</mat-card-footer>
+		</mat-card>
+	}
+
+	<!-- Filter chips -->
+	<div class="margin-top-10">
+		<mat-chip-set fxLayout="row wrap" fxLayoutGap="50px" fxLayoutAlign="start center">
+			@for (chip of filterChips(); track chip) {
+				<mat-chip-row (removed)="removeChip(chip.key)">
+					<span class="text-primary">{{chip.value}}</span>
+					<button matChipRemove [attr.aria-label]="'remove filter'">
+						<mat-icon>cancel</mat-icon>
+					</button>
+				</mat-chip-row>
+			}
+		</mat-chip-set>
+	</div>
+</div>

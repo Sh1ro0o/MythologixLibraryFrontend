@@ -10,7 +10,6 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       //{ path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
-      //{ path: 'books', loadChildren: () => import('./books/books.module').then(m => m.BooksModule) },  // lazy loaded inside layout wrapper
       { path: 'library', loadChildren: () => import('./Library/library.module').then(m => m.LibraryModule) },  // lazy loaded inside layout wrapper
       { path: 'dashboard', component: DashboardComponent },
     ]

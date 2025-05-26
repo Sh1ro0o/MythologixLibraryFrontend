@@ -1,0 +1,50 @@
+@use '../../../../assets/styles/variables' as *;
+
+.filters-container {
+    background: $background-table-header;
+}
+
+.filter-label {
+    color: $text-primary;
+    margin-bottom: 5px;
+}
+
+.filter-input {
+  background-color: #1f2a3c;
+  color: #ffffff;
+  border: 1px solid #2f3e55;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  width: 100%;
+  min-width: 200px;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-input::placeholder {
+  color: #7a8ba3;
+}
+
+.filter-input:focus {
+  border-color: #4683d9;
+  box-shadow: 0 0 0 2px rgba(70, 131, 217, 0.2);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Makes the default icon white */
+  cursor: pointer;
+}
+
+.custom-input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.8;
+}
+
+.custom-input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+.reset-button {
+  background: $background-active;
+}

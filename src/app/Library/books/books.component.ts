@@ -21,6 +21,7 @@ import { ResponseData } from '../../Models/Responses/response-data';
 export class BooksComponent implements OnInit {
   //data
   books: BookData[] = [];
+
   //angular material table data
   booksDataSource: MatTableDataSource<BookData, MatPaginator> = new MatTableDataSource();
   displayedColumns: string[] = ['title', 'isbn', 'authors', 'genres', 'description'];

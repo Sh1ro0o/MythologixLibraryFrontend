@@ -68,7 +68,6 @@ export class FilterComponent {
       if ((filter.control?.value != '' && filter.control?.value != null) && !this.filterChips().some(x => x.key == filter.name)) {
         this.filterChips.update(chipList => {
           const newFilterChip = new FilterChipData(filter.name, filter.control?.value)
-          console.log([...chipList, newFilterChip])
           return [...chipList, newFilterChip];
         });
       }

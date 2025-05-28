@@ -41,7 +41,7 @@
 					}
 				}
 			</mat-card-content>
-			<mat-card-footer>
+			<mat-card-footer class="margin-bot-10">
 				<!-- Apply filters -->
 				<div fxLayout="row" fxLayoutAlign="start end">
 					<button mat-button
@@ -70,7 +70,7 @@
 		<mat-chip-set fxLayout="row wrap" fxLayoutGap="50px" fxLayoutAlign="start center">
 			@for (chip of filterChips(); track chip) {
 				<mat-chip-row (removed)="removeChip(chip.key)">
-					<span class="text-primary">{{chip.value}}</span>
+					<span class="text-secondary">{{chip.key}}: </span><span class="text-primary">{{chip.value}}</span>
 					<button matChipRemove [attr.aria-label]="'remove filter'">
 						<mat-icon>cancel</mat-icon>
 					</button>

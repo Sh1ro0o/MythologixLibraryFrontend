@@ -3,6 +3,7 @@ export class GetBooksRequest {
     title?: string;
     publishDate?: Date;
     ISBN?: string;
+    description?: string;
     includeAuthors?: boolean;
     includeGenres?: boolean;
     

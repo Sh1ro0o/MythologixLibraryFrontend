@@ -1,4 +1,4 @@
-export class FilterChipData {
+export class KeyValue {
     key: string;
     value: string | number | object;
 

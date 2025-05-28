@@ -11,6 +11,9 @@ import { MatSort } from '@angular/material/sort';
 import { AuthorData } from '../../Models/data/author-data';
 import { GenreData } from '../../Models/data/genre-data';
 import { ResponseData } from '../../Models/Responses/response-data';
+import { FilterData } from '../../Models/data/filter-data';
+import { FormControl } from '@angular/forms';
+import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
 
 @Component({
   selector: 'app-books',
@@ -21,10 +24,13 @@ import { ResponseData } from '../../Models/Responses/response-data';
 export class BooksComponent implements OnInit {
   //data
   books: BookData[] = [];
+  booksFilterData!: FilterData[];
 
   //angular material table data
   booksDataSource: MatTableDataSource<BookData, MatPaginator> = new MatTableDataSource();
   displayedColumns: string[] = ['title', 'isbn', 'authors', 'genres', 'description'];
+
+  booksRequest: GetBooksRequest = new GetBooksRequest();
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -42,14 +48,15 @@ export class BooksComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBookData();
+
+    this.booksFilterData = this.initializeFilters();
   }
 
   getBookData() {
-    let getBookRequest = new GetBooksRequest();
-    getBookRequest.pageNumber = this.pageIndex + 1;
-    getBookRequest.pageSize = this.pageSize;
+    this.booksRequest.pageNumber = this.pageIndex + 1;
+    this.booksRequest.pageSize = this.pageSize;
 
-    this.libraryService.getBooks(getBookRequest).pipe(
+    this.libraryService.getBooks(this.booksRequest).pipe(
       withLoading(this.loadingService),
       takeUntilDestroyed(this.destroyRef)
     ).subscribe({
@@ -87,5 +94,35 @@ export class BooksComponent implements OnInit {
 
     //get data based on new pages
     this.getBookData();
+  }
+
+  //filtering
+  filterDataEvent(filterData: FilterData[]) {
+    filterData.forEach(filter => {
+      switch(filter.name) {
+        case('Title'):
+          this.booksRequest.title = filter.control.value;
+          break;
+
+        case('ISBN'):
+          this.booksRequest.ISBN = filter.control.value;
+          break;
+
+        case('Description'):
+          this.booksRequest.description = filter.control.value;
+          break;
+      }
+    });
+
+    //refresh data
+    this.getBookData();
+  }
+
+  private initializeFilters(): FilterData[] {
+    return [
+      new FilterData('Title', new FormControl(), FilterTypeEnum.String),
+      new FilterData('ISBN', new FormControl(), FilterTypeEnum.String),
+      new FilterData('Description', new FormControl(), FilterTypeEnum.String),
+    ];
   }
 }

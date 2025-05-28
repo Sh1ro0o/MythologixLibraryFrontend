@@ -10,6 +10,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { withLoading } from '../../core/operators/with-loading.operator';
 import { GetAuthorsRequest } from '../../Models/Requests/get.authors.request';
 import { ResponseData } from '../../Models/Responses/response-data';
+import { FilterData } from '../../Models/data/filter-data';
+import { FormControl } from '@angular/forms';
+import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
 
 @Component({
   selector: 'app-authors',
@@ -20,9 +23,12 @@ import { ResponseData } from '../../Models/Responses/response-data';
 export class AuthorsComponent implements OnInit {
   //data
   authors: AuthorData[] = [];
+  authorsFilterData!: FilterData[];
   //angular material table data
   authorsDataSource: MatTableDataSource<BookData, MatPaginator> = new MatTableDataSource();
   displayedColumns: string[] = ['firstName', 'lastName'];
+  
+  authorsRequest: GetAuthorsRequest = new GetAuthorsRequest();
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -40,14 +46,14 @@ export class AuthorsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAuthorData();
+    this.authorsFilterData = this.initializeFilters();
   }
 
   getAuthorData() {
-    let getAuthorRequest = new GetAuthorsRequest();
-    getAuthorRequest.pageNumber = this.pageIndex + 1;
-    getAuthorRequest.pageSize = this.pageSize;
+    this.authorsRequest.pageNumber = this.pageIndex + 1;
+    this.authorsRequest.pageSize = this.pageSize;
 
-    this.libraryService.getAuthors(getAuthorRequest).pipe(
+    this.libraryService.getAuthors(this.authorsRequest).pipe(
       withLoading(this.loadingService),
       takeUntilDestroyed(this.destroyRef)
     ).subscribe({
@@ -77,5 +83,30 @@ export class AuthorsComponent implements OnInit {
 
     //get data based on new pages
     this.getAuthorData();
+  }
+
+  //filtering
+  filterDataEvent(filterData: FilterData[]) {
+    filterData.forEach(filter => {
+      switch(filter.name) {
+        case('First Name'):
+          this.authorsRequest.firstName = filter.control.value;
+          break;
+
+        case('Last Name'):
+          this.authorsRequest.lastName = filter.control.value;
+          break;
+      }
+    });
+
+    //refresh data
+    this.getAuthorData();
+  }
+
+  private initializeFilters(): FilterData[] {
+    return [
+      new FilterData('First Name', new FormControl(), FilterTypeEnum.String),
+      new FilterData('Last Name', new FormControl(), FilterTypeEnum.String)
+    ];
   }
 }

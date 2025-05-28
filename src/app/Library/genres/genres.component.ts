@@ -108,8 +108,8 @@ export class GenresComponent {
 
   private initializeFilters(): FilterData[] {
     return [
-      new FilterData('Name', new FormControl(''), FilterTypeEnum.String),
-      new FilterData('Description', new FormControl(''), FilterTypeEnum.String)
+      new FilterData('Name', new FormControl(), FilterTypeEnum.String),
+      new FilterData('Description', new FormControl(), FilterTypeEnum.String)
     ];
   }
 }

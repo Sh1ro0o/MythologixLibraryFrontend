@@ -5,7 +5,6 @@ export class FilterData {
 	name: string;
 	control: FormControl;
 	type: FilterTypeEnum;
-	value?: string;
 
 	constructor(name: string, control: FormControl, type: FilterTypeEnum) {
 		this.name = name;

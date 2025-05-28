@@ -1,6 +1,7 @@
 <div class="main-content-wrapper">
   <h1 class="text-primary margin-top-0">BOOKS</h1>
-  <!-- BOOKS FILTER -->
+  <!-- Filter -->
+  <app-filter [filterData]="booksFilterData" (applyFilters)="filterDataEvent($event)"></app-filter>
 
   <!-- BOOKS TABLE -->
   <div class="table-wrapper margin-top-10">

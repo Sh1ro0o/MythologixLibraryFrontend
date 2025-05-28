@@ -2,7 +2,7 @@ import { Component, effect, input, output, signal, WritableSignal } from '@angul
 import { FilterData } from '../../../Models/data/filter-data';
 import { FilterTypeEnum } from '../../Enums/filter-type.enum';
 import { FormControl } from '@angular/forms';
-import { FilterChipData } from '../../../Models/data/filter-chip-data';
+import { KeyValue } from '../../../Models/data/key-value';
 
 @Component({
   selector: 'app-filter',
@@ -20,7 +20,7 @@ export class FilterComponent {
   isFiltering: boolean = false;
   filterTypeEnum = FilterTypeEnum;
   localFilters: WritableSignal<FilterData[]> = signal([]);
-  filterChips: WritableSignal<FilterChipData[]> = signal([]);
+  filterChips: WritableSignal<KeyValue[]> = signal([]);
 
 
   constructor() {
@@ -65,10 +65,27 @@ export class FilterComponent {
   createChips() {
     this.localFilters().forEach(filter => {
       //if control value isnt empty and a filter doesn't already exist then we add a chip
-      if ((filter.control?.value != '' && filter.control?.value != null) && !this.filterChips().some(x => x.key == filter.name)) {
+      const filterControlValue = filter.control?.value;
+      const currentChips = this.filterChips();
+
+      if (filterControlValue !== null && filterControlValue !== undefined && filterControlValue !== '') {
+        const newFilterChip = new KeyValue(filter.name, filter.control?.value)
+
         this.filterChips.update(chipList => {
-          const newFilterChip = new FilterChipData(filter.name, filter.control?.value)
-          return [...chipList, newFilterChip];
+          //check if chip needs to change based on filter value change
+          const existingIndex = currentChips.findIndex(x => x.key === filter.name);
+          if (existingIndex !== -1) {
+            if(chipList[existingIndex].value !== filterControlValue) {
+              const updatedChips = [...chipList];
+              updatedChips[existingIndex] = newFilterChip;
+
+              return updatedChips;//update chip
+            }
+            return chipList; //no change needed
+          }
+          
+          //if chip doesn't exist we add it
+           return [...chipList, newFilterChip];
         });
       }
     });

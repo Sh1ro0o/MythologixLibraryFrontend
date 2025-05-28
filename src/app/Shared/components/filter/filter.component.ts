@@ -2,7 +2,8 @@ import { Component, effect, input, output, signal, WritableSignal } from '@angul
 import { FilterData } from '../../../Models/data/filter-data';
 import { FilterTypeEnum } from '../../Enums/filter-type.enum';
 import { FormControl } from '@angular/forms';
-import { KeyValue } from '../../../Models/data/key-value';
+import { CustomKeyValue } from '../../../Models/data/key-value';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-filter',
@@ -12,45 +13,69 @@ import { KeyValue } from '../../../Models/data/key-value';
 })
 
 export class FilterComponent {
-  //Input
+  //Input - List of filters passed from the parent component
+  //Each filter contains a name, type, and FormControl
+  //For FilterTypeEnum.Checkbox display filter should contain a CustomKeyValue[] (key: id, value: string to display to user)
   filterData = input.required<FilterData[]>();
-  //Output
+  
+  //Output - Emits the current filter state (after applying or resetting),
   applyFilters = output<FilterData[]>();
 
   isFiltering: boolean = false;
   filterTypeEnum = FilterTypeEnum;
   localFilters: WritableSignal<FilterData[]> = signal([]);
-  filterChips: WritableSignal<KeyValue[]> = signal([]);
-
+  
+  filterChips: WritableSignal<CustomKeyValue[]> = signal([]);
 
   constructor() {
-    effect(() => {
-      //deep copy with FormControl
-      const clonedFilters = this.filterData().map(data => ({
-        name: data.name,
-        type: data.type,
-        control: new FormControl(data.control.value),
-      }));
+  effect(() => {
+    const clonedFilters: FilterData[] = this.filterData().map(data => {
+      const isCheckbox = data.type === FilterTypeEnum.Checkbox;
 
-      this.localFilters.set(clonedFilters);
+      //clone value based on expected type
+      let clonedControl: FormControl<string | CustomKeyValue[]>; 
+      if (isCheckbox) {
+        clonedControl = new FormControl<CustomKeyValue[]>([...data.control.value as CustomKeyValue[] ?? []], { nonNullable: true });
+      }
+      else {
+        clonedControl = new FormControl<string>(data.control.value as string ?? '', { nonNullable: true });
+      }
+
+      return new FilterData(
+        data.name,
+        clonedControl,
+        data.type,
+        [...data.customKeyValue ?? []]
+      );
     });
-  }
 
+    this.localFilters.set(clonedFilters);
+  });
+}
+
+
+  /*
+  *   Called when user clicks "Apply Filters" button
+  * - Creates chips for active filters
+  * - Emits current filter state to parent
+  */
   onApplyFilters() {
-    //create chips
     this.createChips()
-
-    //notify parent
     this.applyFilters.emit(this.localFilters());
   }
 
+  /*
+  *   Called when user clicks "Reset Filters"
+  * - Resets all FormControls to initial state
+  * - Clears all filter chips
+  * - Emits cleared filter state to parent
+  */
   onResetFilters() {
+    //reset form controls
     this.localFilters.update(filters =>
       filters.map(filter => {
-        // Reset each control
         filter.control.reset();
 
-        // Return the same filter (control is already updated)
         return filter;
       })
     );
@@ -62,14 +87,27 @@ export class FilterComponent {
     this.applyFilters.emit(this.localFilters());
   }
 
+  /*
+  *   Builds/updates the chip list based on the current state of filters
+  * - Avoids duplicates
+  * - Updates chip value if the filter value has changed
+  */
   createChips() {
     this.localFilters().forEach(filter => {
-      //if control value isnt empty and a filter doesn't already exist then we add a chip
-      const filterControlValue = filter.control?.value;
       const currentChips = this.filterChips();
+      
+      //format the value correctly based on filter type
+      let filterControlValue: string;
+      if (filter.type === this.filterTypeEnum.Checkbox) {
+        let checkboxControlValue = filter.control as FormControl<CustomKeyValue[]>;
+        filterControlValue = checkboxControlValue?.value?.map((keyValue: CustomKeyValue) => keyValue.value).join(', ');
+      } else {
+        let stringControlValue = filter.control as FormControl<string>;
+        filterControlValue = stringControlValue?.value;
+      }
 
       if (filterControlValue !== null && filterControlValue !== undefined && filterControlValue !== '') {
-        const newFilterChip = new KeyValue(filter.name, filter.control?.value)
+        const newFilterChip = new CustomKeyValue(filter.name, filterControlValue)
 
         this.filterChips.update(chipList => {
           //check if chip needs to change based on filter value change
@@ -91,7 +129,13 @@ export class FilterComponent {
     });
   }
 
-  removeChip(chipKey: string) {
+  /*
+  *   Removes a chip and resets the corresponding filter
+  * - Removes visual chip
+  * - Resets matching FormControl
+  * - Emits updated filters to parent
+  */
+  removeTextChip(chipKey: string) {
     //remove chip
     this.filterChips.update(chipList =>
       chipList.filter(x => x.key != chipKey)
@@ -110,5 +154,26 @@ export class FilterComponent {
 
     //notify parent
     this.applyFilters.emit(this.localFilters());
+  }
+
+  onCheckboxChange(event: MatCheckboxChange, control: FormControl, checkboxKeyValue: CustomKeyValue) {
+    const checkboxControl = control as FormControl<CustomKeyValue[]>;
+    const currentValues = checkboxControl.value || [];
+
+    if (event.checked) {
+      control.setValue([...currentValues, checkboxKeyValue]);
+    } else {
+      control.setValue(currentValues.filter(x => x !== checkboxKeyValue));
+    }
+  }
+
+  isCheckboxChecked(control: FormControl, checkboxKeyValue: CustomKeyValue) {
+    const checkboxControl = control as FormControl<CustomKeyValue[]>;
+
+    if (Array.isArray(checkboxControl.value)) {
+      return checkboxControl.value.some(item => item.key === checkboxKeyValue.key);
+    }
+
+    return false;
   }
 }

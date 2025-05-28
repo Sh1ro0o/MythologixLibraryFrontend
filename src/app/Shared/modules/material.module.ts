@@ -14,6 +14,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -39,6 +40,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatMenuModule,
     MatTooltipModule,
     MatChipsModule,
+    MatCheckboxModule,
   ],
   exports: [
     MatCard,
@@ -62,6 +64,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatMenuModule,
     MatTooltipModule,
     MatChipsModule,
+    MatCheckboxModule,
   ]
 })
 export class MaterialModule { }

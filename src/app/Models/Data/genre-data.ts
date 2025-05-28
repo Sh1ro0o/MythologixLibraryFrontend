@@ -1,5 +1,5 @@
 export interface GenreData {
-    recordId?: number;
+    recordId: number;
     name?: string;
     description?: string;
 }

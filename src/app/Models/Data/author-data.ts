@@ -1,5 +1,5 @@
 export interface AuthorData {
-    recordId?: number;
+    recordId: number;
     firstName?: string;
     lastName?: string;
 }

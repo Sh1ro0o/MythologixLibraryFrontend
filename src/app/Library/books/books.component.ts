@@ -14,6 +14,10 @@ import { ResponseData } from '../../Models/Responses/response-data';
 import { FilterData } from '../../Models/data/filter-data';
 import { FormControl } from '@angular/forms';
 import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
+import { GetGenresRequest } from '../../Models/Requests/get.genres.request';
+import { CustomKeyValue } from '../../Models/data/key-value';
+import { forkJoin, Observable } from 'rxjs';
+import { GetAuthorsRequest } from '../../Models/Requests/get.authors.request';
 
 @Component({
   selector: 'app-books',
@@ -24,7 +28,9 @@ import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
 export class BooksComponent implements OnInit {
   //data
   books: BookData[] = [];
-  booksFilterData!: FilterData[];
+  genres: GenreData[] = [];
+  authors: AuthorData[] = [];
+  booksFilterData: FilterData[] = [];
 
   //angular material table data
   booksDataSource: MatTableDataSource<BookData, MatPaginator> = new MatTableDataSource();
@@ -47,9 +53,24 @@ export class BooksComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    //main data GET
     this.getBookData();
+    
+    //filtering GET
+    forkJoin({
+      genresRes: this.getGenresData(),
+      authorsRes: this.getAuthorsData()
+    }).subscribe(({ genresRes, authorsRes }) => {
+      if (genresRes.data) {
+        this.genres = genresRes.data;
+      }
+      if (authorsRes.data) {
+        this.authors = authorsRes.data;
+      }
 
-    this.booksFilterData = this.initializeFilters();
+      //initialize filters
+      this.booksFilterData = this.initializeFilters();
+    });
   }
 
   getBookData() {
@@ -64,7 +85,7 @@ export class BooksComponent implements OnInit {
         if (booksData.data) {
           //Assign data
           this.books = booksData?.data;
-          this.booksDataSource = new MatTableDataSource(booksData.data);
+          this.booksDataSource.data = booksData.data;
 
           //total pages length
           this.length = booksData.totalCount ?? 0;
@@ -79,11 +100,29 @@ export class BooksComponent implements OnInit {
     });
   }
 
-  getAuthors(authors: AuthorData[]) {
+  getGenresData(): Observable<ResponseData<GenreData[]>> {
+    const genresRequest = new GetGenresRequest();
+
+    return this.libraryService.getGenres(genresRequest).pipe(
+      withLoading(this.loadingService),
+      takeUntilDestroyed(this.destroyRef)
+    );
+  }
+
+  getAuthorsData(): Observable<ResponseData<AuthorData[]>> {
+    const authorsRequest = new GetAuthorsRequest();
+
+    return this.libraryService.getAuthors(authorsRequest).pipe(
+      withLoading(this.loadingService),
+      takeUntilDestroyed(this.destroyRef)
+    );
+  }
+
+  getAuthorsNames(authors: AuthorData[]) {
     return authors.map(author => `${author.firstName} ${author.lastName}`).join(', ');
   }
 
-  getGenres(genres: GenreData[]) {
+  getGenresNames(genres: GenreData[]) {
     return genres.map(genre => genre.name).join(', ');
   }
 
@@ -101,15 +140,29 @@ export class BooksComponent implements OnInit {
     filterData.forEach(filter => {
       switch(filter.name) {
         case('Title'):
-          this.booksRequest.title = filter.control.value;
+          this.booksRequest.title = filter.control.value as string;
           break;
 
         case('ISBN'):
-          this.booksRequest.ISBN = filter.control.value;
+          this.booksRequest.ISBN = filter.control.value as string;
           break;
 
         case('Description'):
-          this.booksRequest.description = filter.control.value;
+          this.booksRequest.description = filter.control.value as string;
+          break;
+
+        case('Genre'):
+          const genreIds = filter.control.value as CustomKeyValue[];
+          if (genreIds.length > 0) {
+            this.booksRequest.genreIds = genreIds?.map(customKeyValue => +customKeyValue.key);
+          }
+          break;
+
+        case('Author'):
+          const authorIds = filter.control.value as CustomKeyValue[];
+          if (authorIds.length > 0) {
+            this.booksRequest.authorIds = authorIds.map(customKeyValue => +customKeyValue.key);
+          }
           break;
       }
     });
@@ -119,10 +172,26 @@ export class BooksComponent implements OnInit {
   }
 
   private initializeFilters(): FilterData[] {
-    return [
+    let newFilterData: FilterData[] = [
       new FilterData('Title', new FormControl(), FilterTypeEnum.String),
       new FilterData('ISBN', new FormControl(), FilterTypeEnum.String),
       new FilterData('Description', new FormControl(), FilterTypeEnum.String),
     ];
+    
+    //Genres filter setup
+    const genresKeyValues: CustomKeyValue[] = [];
+    this.genres.forEach(genre => {
+      genresKeyValues.push(new CustomKeyValue(genre.recordId.toString(), genre.name ?? ''))
+    });
+    newFilterData.push(new FilterData('Genre', new FormControl(), FilterTypeEnum.Checkbox, genresKeyValues))
+
+    //Authors filter setup
+    const authorsKeyValues: CustomKeyValue[] = [];
+    this.authors.forEach(author => {
+      authorsKeyValues.push(new CustomKeyValue(author.recordId.toString(), `${author.firstName} ${author.lastName}`))
+    });
+    newFilterData.push(new FilterData('Author', new FormControl(), FilterTypeEnum.Checkbox, authorsKeyValues))
+
+    return newFilterData;
   }
 }

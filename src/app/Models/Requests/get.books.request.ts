@@ -6,6 +6,9 @@ export class GetBooksRequest {
     description?: string;
     includeAuthors?: boolean;
     includeGenres?: boolean;
+
+    authorIds?: number[];
+    genreIds?: number[];
     
     pageNumber?: number;
     pageSize?: number;

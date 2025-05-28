@@ -22,7 +22,7 @@ import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
 export class GenresComponent {
   //data
   genres: GenreData[] = [];
-  genresFilterData!: FilterData[];
+  genresFilterData: FilterData[] = [];
   genresRequest: GetGenresRequest = new GetGenresRequest();
 
   //angular material table data
@@ -93,11 +93,11 @@ export class GenresComponent {
     filterData.forEach(filter => {
       switch(filter.name) {
         case('Name'):
-          this.genresRequest.name = filter.control.value;
+          this.genresRequest.name = filter.control.value as string;
           break;
 
         case('Description'):
-          this.genresRequest.description = filter.control.value;
+          this.genresRequest.description = filter.control.value as string;
           break;
       }
     });

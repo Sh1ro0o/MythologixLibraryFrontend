@@ -23,9 +23,9 @@ import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
 export class AuthorsComponent implements OnInit {
   //data
   authors: AuthorData[] = [];
-  authorsFilterData!: FilterData[];
+  authorsFilterData: FilterData[] = [];
   //angular material table data
-  authorsDataSource: MatTableDataSource<BookData, MatPaginator> = new MatTableDataSource();
+  authorsDataSource: MatTableDataSource<AuthorData, MatPaginator> = new MatTableDataSource();
   displayedColumns: string[] = ['firstName', 'lastName'];
   
   authorsRequest: GetAuthorsRequest = new GetAuthorsRequest();
@@ -61,7 +61,7 @@ export class AuthorsComponent implements OnInit {
         if (authorsData.data) {
           //Assign data
           this.authors = authorsData?.data;
-          this.authorsDataSource = new MatTableDataSource(authorsData.data);
+          this.authorsDataSource.data = authorsData.data;
 
           //total pages length
           this.length = authorsData.totalCount ?? 0;
@@ -90,11 +90,11 @@ export class AuthorsComponent implements OnInit {
     filterData.forEach(filter => {
       switch(filter.name) {
         case('First Name'):
-          this.authorsRequest.firstName = filter.control.value;
+          this.authorsRequest.firstName = filter.control.value as string;
           break;
 
         case('Last Name'):
-          this.authorsRequest.lastName = filter.control.value;
+          this.authorsRequest.lastName = filter.control.value as string;
           break;
       }
     });

@@ -28,31 +28,44 @@ export class FilterComponent {
   filterChips: WritableSignal<CustomKeyValue[]> = signal([]);
 
   constructor() {
-  effect(() => {
-    const clonedFilters: FilterData[] = this.filterData().map(data => {
-      const isCheckbox = data.type === FilterTypeEnum.Checkbox;
+    //create new local array from input signal
+    effect(() => {
+      const clonedFilters: FilterData[] = this.filterData().map(data => {
+        const isCheckbox = data.type === FilterTypeEnum.Checkbox;
 
-      //clone value based on expected type
-      let clonedControl: FormControl<string | CustomKeyValue[]>; 
-      if (isCheckbox) {
-        clonedControl = new FormControl<CustomKeyValue[]>([...data.control.value as CustomKeyValue[] ?? []], { nonNullable: true });
-      }
-      else {
-        clonedControl = new FormControl<string>(data.control.value as string ?? '', { nonNullable: true });
-      }
+        //clone value based on expected type
+        let clonedControl: FormControl<string | CustomKeyValue[]>; 
+        if (isCheckbox) {
+          clonedControl = new FormControl<CustomKeyValue[]>([...data.control.value as CustomKeyValue[] ?? []], { nonNullable: true });
+        }
+        else {
+          clonedControl = new FormControl<string>(data.control.value as string ?? '', { nonNullable: true });
+        }
 
-      return new FilterData(
-        data.name,
-        clonedControl,
-        data.type,
-        [...data.customKeyValue ?? []]
-      );
+        return new FilterData(
+          data.name,
+          clonedControl,
+          data.type,
+          [...data.customKeyValue ?? []]
+        );
+      });
+
+      this.localFilters.set(clonedFilters);
+      
+      //setup eventlistener for trimming of formcontrol string values
+      clonedFilters.forEach(filter => {
+      if (filter.type === FilterTypeEnum.String) {
+          const control = filter.control as FormControl<string>;
+          control.valueChanges.subscribe(value => {
+            const trimmed = value?.trim() ?? '';
+            if (value !== trimmed) {
+              control.setValue(trimmed, { emitEvent: false });
+            }
+          });
+        }
+      });
     });
-
-    this.localFilters.set(clonedFilters);
-  });
-}
-
+  }
 
   /*
   *   Called when user clicks "Apply Filters" button

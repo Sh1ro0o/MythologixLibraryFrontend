@@ -58,6 +58,6 @@ const NAV_DATA: TreeNodeData[] = [
   {
     name: 'Users',
     icon: 'person',
-    route: ROUTES.REGISTER
+    route: ROUTES.USERS
   }
 ];

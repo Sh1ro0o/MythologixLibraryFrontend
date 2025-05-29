@@ -103,6 +103,7 @@ export class GenresComponent {
     });
 
     //refresh data
+    this.setTableToFirstPage();
     this.getGenreData();
   }
 
@@ -111,5 +112,9 @@ export class GenresComponent {
       new FilterData('Name', new FormControl(), FilterTypeEnum.String),
       new FilterData('Description', new FormControl(), FilterTypeEnum.String)
     ];
+  }
+  
+  private setTableToFirstPage(): void {
+    this.pageIndex = 0;
   }
 }

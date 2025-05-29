@@ -100,6 +100,7 @@ export class AuthorsComponent implements OnInit {
     });
 
     //refresh data
+    this.setTableToFirstPage();
     this.getAuthorData();
   }
 
@@ -108,5 +109,9 @@ export class AuthorsComponent implements OnInit {
       new FilterData('First Name', new FormControl(), FilterTypeEnum.String),
       new FilterData('Last Name', new FormControl(), FilterTypeEnum.String)
     ];
+  }
+
+  private setTableToFirstPage(): void {
+    this.pageIndex = 0;
   }
 }

@@ -11,7 +11,7 @@
 	<!-- Filter options -->
 	@if (isFiltering) {
 		<mat-card class="margin-top-10 filters-container">
-			<mat-card-content fxLayout="row wrap" fxLayoutGap="50px" fxLayoutAlign="start center">
+			<mat-card-content fxLayout="row wrap" fxLayoutGap="50px" fxLayoutAlign="start start">
 				@for (filterItem of localFilters(); track $index) {
 					@switch (filterItem.type) {
 						<!-- String filter -->
@@ -85,7 +85,7 @@
 		<mat-chip-set fxLayout="row wrap" fxLayoutGap="50px" fxLayoutAlign="start center">
 			<!-- Text chips -->
 			@for (chip of filterChips(); track chip) {
-				<mat-chip-row (removed)="removeTextChip(chip.key)">
+				<mat-chip-row (removed)="removeChip(chip.key)">
 					<span class="text-secondary">{{chip.key}}: </span><span class="text-primary">{{chip.value}}</span>
 					<button matChipRemove [attr.aria-label]="'remove filter'">
 						<mat-icon>cancel</mat-icon>

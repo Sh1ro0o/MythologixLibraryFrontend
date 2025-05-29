@@ -106,7 +106,11 @@ export class FilterComponent {
         filterControlValue = stringControlValue?.value;
       }
 
-      if (filterControlValue !== null && filterControlValue !== undefined && filterControlValue !== '') {
+      //if user sets filter to empty string remove the chip
+      if (filterControlValue === '') {
+        this.removeChip(filter.name);
+      }
+      else if (filterControlValue !== null && filterControlValue !== undefined) {
         const newFilterChip = new CustomKeyValue(filter.name, filterControlValue)
 
         this.filterChips.update(chipList => {
@@ -123,7 +127,7 @@ export class FilterComponent {
           }
           
           //if chip doesn't exist we add it
-           return [...chipList, newFilterChip];
+          return [...chipList, newFilterChip];
         });
       }
     });
@@ -135,7 +139,7 @@ export class FilterComponent {
   * - Resets matching FormControl
   * - Emits updated filters to parent
   */
-  removeTextChip(chipKey: string) {
+  removeChip(chipKey: string) {
     //remove chip
     this.filterChips.update(chipList =>
       chipList.filter(x => x.key != chipKey)

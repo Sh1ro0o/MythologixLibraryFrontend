@@ -153,21 +153,20 @@ export class BooksComponent implements OnInit {
 
         case('Genre'):
           const genreIds = filter.control.value as CustomKeyValue[];
-          if (genreIds.length > 0) {
-            this.booksRequest.genreIds = genreIds?.map(customKeyValue => +customKeyValue.key);
-          }
+
+          this.booksRequest.genreIds = genreIds?.map(customKeyValue => +customKeyValue.key);
           break;
 
         case('Author'):
           const authorIds = filter.control.value as CustomKeyValue[];
-          if (authorIds.length > 0) {
-            this.booksRequest.authorIds = authorIds.map(customKeyValue => +customKeyValue.key);
-          }
+          
+          this.booksRequest.authorIds = authorIds.map(customKeyValue => +customKeyValue.key);
           break;
       }
     });
 
     //refresh data
+    this.setTableToFirstPage();
     this.getBookData();
   }
 
@@ -193,5 +192,9 @@ export class BooksComponent implements OnInit {
     newFilterData.push(new FilterData('Author', new FormControl(), FilterTypeEnum.Checkbox, authorsKeyValues))
 
     return newFilterData;
+  }
+
+  private setTableToFirstPage(): void {
+    this.pageIndex = 0;
   }
 }

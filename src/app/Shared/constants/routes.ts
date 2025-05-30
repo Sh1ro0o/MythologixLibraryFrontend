@@ -11,6 +11,11 @@ export const ROUTES = {
     AUTHORS: 'library/authors',
     GENRES: 'library/genres',
 
+    //Activity
+    BORROWED: 'activity/borrowed',
+    RETURNED: 'activity/returned',
+    OVERDUE: 'activity/overdue',
+
     //Admin
     USERS: 'admin/users',
 }

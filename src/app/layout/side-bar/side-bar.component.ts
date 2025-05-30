@@ -41,17 +41,17 @@ const NAV_DATA: TreeNodeData[] = [
       {
         name: 'Borrowed',
         icon: 'swipe_right_alt',
-        route: ROUTES.REGISTER
+        route: ROUTES.BORROWED
       },
       {
         name: 'Returned',
         icon: 'swipe_left_alt',
-        route: ROUTES.REGISTER
+        route: ROUTES.RETURNED
       },
       {
         name: 'Overdue',
         icon: 'priority_high',
-        route: ROUTES.REGISTER,
+        route: ROUTES.OVERDUE,
       },
     ],
   },

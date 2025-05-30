@@ -12,6 +12,7 @@ const routes: Routes = [
       { path: 'library', loadChildren: () => import('./Library/library.module').then(m => m.LibraryModule) },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+      { path: 'activity', loadChildren: () => import('./activity/activity.module').then(m => m.ActivityModule) },
     ]
   },
 

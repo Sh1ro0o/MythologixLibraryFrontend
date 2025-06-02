@@ -10,6 +10,8 @@ import { GetAuthorsRequest } from "../Models/Requests/get.authors.request";
 import { AuthorData } from "../Models/data/author-data";
 import { GetGenresRequest } from "../Models/Requests/get.genres.request";
 import { GenreData } from "../Models/data/genre-data";
+import { GetBookCopyRequest } from "../Models/Requests/get.book-copy.request";
+import { BookCopyData } from "../Models/data/book-copy-data";
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +24,10 @@ export class LibraryService {
 
   getBooks(getBookRequest: GetBooksRequest): Observable<ResponseData<BookData[]>> {
     return this.http.get<ResponseData<BookData[]>>(this.apiUrl + '/Book/allBooks', {params: toHttpParams(getBookRequest)});
+  }
+
+  getBookCopies(getBookCopyRequest: GetBookCopyRequest): Observable<ResponseData<BookCopyData[]>> {
+    return this.http.get<ResponseData<BookCopyData[]>>(this.apiUrl + '/BookCopy/allBookCopies', {params: toHttpParams(getBookCopyRequest)});
   }
 
   getAuthors(getAuthorRequest: GetAuthorsRequest): Observable<ResponseData<AuthorData[]>> {

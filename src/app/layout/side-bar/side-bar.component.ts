@@ -31,6 +31,11 @@ const NAV_DATA: TreeNodeData[] = [
         name: 'Genres',
         icon: 'lists',
         route: ROUTES.GENRES
+      },
+      {
+        name: 'Book Copies',
+        icon: 'book_5',
+        route: ROUTES.BOOKCOPIES
       }
     ]
   },

@@ -4,8 +4,8 @@ export class GetBooksRequest {
     publishDate?: Date;
     ISBN?: string;
     description?: string;
-    includeAuthors?: boolean;
-    includeGenres?: boolean;
+    includeAuthors?: boolean; //default true in backend, set explicitly if needed
+    includeGenres?: boolean; //default true in backend, set explicitly if needed
 
     authorIds?: number[];
     genreIds?: number[];

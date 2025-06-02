@@ -10,6 +10,7 @@ export const ROUTES = {
     BOOKS: 'library/books',
     AUTHORS: 'library/authors',
     GENRES: 'library/genres',
+    BOOKCOPIES: 'library/bookcopies',
 
     //Activity
     BORROWED: 'activity/borrowed',

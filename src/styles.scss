@@ -79,6 +79,14 @@ html {
   margin-left: 10px;
 }
 
+.margin-left-15 {
+  margin-left: 15px;
+}
+
+.margin-left-20 {
+  margin-left: 20px;
+}
+
 .bold {
     font-weight: bold;
 }
@@ -338,4 +346,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .form-group {
   display: flex;
   flex-direction: column;
+}
+
+.error-icon {
+  font-size: 14px;
+  color: $error-color;
+  font-weight: 500;
+}
+
+.success-icon {
+  font-size: 14px;
+  color: $success-color;
+  font-weight: 500;
 }

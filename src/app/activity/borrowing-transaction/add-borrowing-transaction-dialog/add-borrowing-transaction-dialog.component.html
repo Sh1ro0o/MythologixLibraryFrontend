@@ -1,11 +1,58 @@
-<div fxLayout="row" fxLayoutAlign="center center" class="filters-container">
-  <div fxLayout="column" fxLayoutAlign="center center" class="dialog-inputs-container">
-    <!-- Row 1 -->
-    <div fxLayout="row wrap" fxLayoutAlign="center center">
-      <p fxFlex="45">add-borrowing-transaction-dialog works!</p>
-      <p fxFlex="45">add-borrowing-transaction-dialog works!</p>
-      <p fxFlex="45">add-borrowing-transaction-dialog works!</p>
-      <p fxFlex="45">add-borrowing-transaction-dialog works!</p>
+<div [formGroup]="addBorrowingTransactionGroup" class="dialog-container">
+  <div fxLayout="row" fxLayoutAlign="space-between start">
+	  <h2 class="text-primary margin-top-0">ADD BORROWED BOOK</h2>
+    <mat-icon class="text-primary clickable" (click)="closeDialog()">close</mat-icon>
+  </div>
+  <div class="form-grid">
+    <!-- Due Date -->
+    <div class="form-group">
+      <label class="filter-label">Due Date:</label>
+      <input
+        class="dialog-input"
+        type="date"
+        formControlName="dueDate" />
+    </div>
+
+    <!-- Book Copy Id -->
+    <div class="form-group">
+      <label class="filter-label">Book Copy Id:</label>
+      <input
+        class="dialog-input"
+        type="text"
+        formControlName="bookCopyId" />
+    </div>
+
+    <!-- User Id -->
+    <div class="form-group">
+      <label class="filter-label">User Id:</label>
+      <div fxLayout="row wrap" fxLayoutAlign="start start">
+        <!-- User id display -->
+        <input
+          [fxFlex]="68"
+          class="dialog-input margin-right-5"
+          type="text"
+          formControlName="userId" />
+        <!-- Select -->
+        <button mat-button
+            [fxFlex]="30"
+						class="filtering-button margin-5"
+						style="margin: 0; height: 30px;"
+						(click)="openUserDialog()"
+						matTooltip="SelectUser"
+						[matTooltipPosition]="'below'"><span class="text-primary">Select User</span>
+				</button>
+      </div>
     </div>
   </div>
+
+	<div fxLayout="row" fxLayoutAlign="start center">
+				<!-- Apply filters -->
+				<button mat-button
+						class="filtering-button margin-5"
+						style="margin-top: 30px; height: 30px;"
+						(click)="onAdd()"
+						matTooltip="Add"
+						[matTooltipPosition]="'left'"><span class="text-primary">Add</span>
+				</button>
+	</div>
 </div>

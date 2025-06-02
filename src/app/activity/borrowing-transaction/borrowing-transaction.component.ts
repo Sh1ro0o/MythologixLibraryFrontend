@@ -109,9 +109,9 @@ export class BorrowingTransactionComponent implements OnInit {
   addBorrowingTransaction() {
     this.dialog.open(AddBorrowingTransactionDialogComponent, {
       width: '50vw',
-      maxWidth: '100vw', // prevent overflow
-      height: 'auto'
-    })
+      maxWidth: '100vw',
+      height: '50vh'
+    });
   }
 
   //pagination

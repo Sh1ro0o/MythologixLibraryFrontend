@@ -59,6 +59,10 @@ html {
     margin-right: 15px;
 }
 
+.margin-right-10 {
+    margin-right: 10px;
+}
+
 .margin-right-5 {
   margin-right: 5px;
 }
@@ -135,6 +139,14 @@ button[disabled] {
   width: 25%;
 }
 
+.w-40 {
+  width: 40%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
 /* Loading Circle START */
 .overlay {
   position: absolute;
@@ -169,22 +181,6 @@ button[disabled] {
 }
 
 /* Custom Mat Table styling overwrite START */
-.mat-mdc-row:nth-child(even) {
-  background-color: #1E2A38 !important;
-}
-
-.mat-mdc-row:nth-child(odd) {
-  background-color: #22303F !important;
-}
-
-.mat-mdc-cell {
-  color: $text-primary !important;
-}
-
-.mat-sort-header {
-	background-color: $background-table-header !important;
-	color: $text-secondary !important;
-}
 
 .table-wrapper {
 	border: 2px solid $primary-dark;
@@ -192,28 +188,51 @@ button[disabled] {
 	box-shadow: 0 0 20px 2px rgba($primary-dark, 0.6);
   overflow: hidden;
   padding: 0;
+
+  .mat-mdc-paginator-container {
+    background-color: $background-table-header !important;
+    color: $text-primary !important;
+  }
+
+  .mat-mdc-select-value {
+    color: $text-primary !important;
+  }
+
+  .mat-mdc-paginator-icon {
+    fill: $text-secondary !important;
+  }
+
+  .mat-mdc-button-disabled .mat-mdc-paginator-icon {
+    fill: $text-disabled !important;
+  }
+
+  .mat-sort-header-arrow svg {
+    fill: $text-secondary !important;
+  }
+
+  .mat-mdc-row:nth-child(even) {
+    background-color: #1E2A38 !important;
+  }
+
+  .mat-mdc-row:nth-child(odd) {
+    background-color: #22303F !important;
+  }
+
+  .mat-mdc-cell {
+    color: $text-primary !important;
+  }
+
+  .mat-sort-header {
+    background-color: $background-table-header !important;
+    color: $text-secondary !important;
+  }
+
+  .mat-mdc-row:hover {
+    background-color: $table-row-hover !important; /* or try one of the others */
+    transition: background-color 0.2s ease-in-out !important;
+  }
 }
 
-.mat-mdc-paginator-container {
-	background-color: $background-table-header !important;
-  color: $text-primary !important;
-}
-
-.mat-mdc-select-value {
-  color: $text-primary !important;
-}
-
-.mat-mdc-paginator-icon {
-  fill: $text-secondary !important;
-}
-
-.mat-mdc-button-disabled .mat-mdc-paginator-icon {
-  fill: $text-disabled !important;
-}
-
-.mat-sort-header-arrow svg {
-  fill: $text-secondary !important;
-}
 /* Custom Mat Table styling overwrite END */
 
 /* filterin styling START */
@@ -282,3 +301,41 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* filterin styling END */
+
+.dialog-container {
+  padding: 30px;
+  background: $background-table-header !important;
+  height: 100%;
+}
+
+.dialog-input {
+  background-color: #1f2a3c;
+  color: #ffffff;
+  border: 1px solid #2f3e55;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dialog-input::placeholder {
+  color: #7a8ba3;
+}
+
+.dialog-input:focus {
+  border-color: #4683d9;
+  box-shadow: 0 0 0 2px rgba(70, 131, 217, 0.2);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}

@@ -10,17 +10,17 @@ import { AddBorrowingTransactionDialogComponent } from './borrowing-transaction/
 
 
 @NgModule({
-    declarations: [
+  declarations: [
     BorrowingTransactionComponent,
     AddBorrowingTransactionDialogComponent,
   ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        ActivityRoutingModule, //Routes
-        MaterialModule,
-        FlexLayoutModule,
-        SharedModule,
-    ]
-  })
-  export class ActivityModule {}
+  imports: [
+      CommonModule,
+      ReactiveFormsModule,
+      ActivityRoutingModule, //Routes
+      MaterialModule,
+      FlexLayoutModule,
+      SharedModule,
+  ]
+})
+export class ActivityModule {}

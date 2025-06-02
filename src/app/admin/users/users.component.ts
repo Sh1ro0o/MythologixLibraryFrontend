@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ViewChild } from '@angular/core';
+import { Component, DestroyRef, Optional, ViewChild } from '@angular/core';
 import { UserData } from '../../Models/data/user-data';
 import { FilterData } from '../../Models/data/filter-data';
 import { GetUsersRequest } from '../../Models/Requests/get.users.request';
@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
 import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-users',
@@ -41,6 +42,7 @@ export class UsersComponent {
     private adminService: AdminService,
     private loadingService: LoadingService,
     private destroyRef: DestroyRef,
+    @Optional() public dialogRef?: MatDialogRef<UsersComponent>
   ) { }
 
   ngOnInit(): void {
@@ -101,6 +103,14 @@ export class UsersComponent {
     //refresh data
     this.setTableToFirstPage();
     this.getUserData();
+  }
+
+  closeDialog(): void {
+    this.dialogRef?.close();
+  }
+
+  onRowClicked(user: UserData): void {
+    this.dialogRef?.close(user);
   }
 
   private initializeFilters(): FilterData[] {

@@ -1,5 +1,15 @@
-<div class="main-content-wrapper">
-  <h1 class="text-primary margin-top-0">USERS</h1>
+<div [ngClass]="dialogRef ? 'dialog-container' : 'main-content-wrapper'">
+  @if (dialogRef) {
+    
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+      <h2 class="text-primary margin-top-0">USERS</h2>
+      <mat-icon class="text-primary clickable" (click)="closeDialog()">close</mat-icon>
+    </div>
+  }
+  @else {
+    <h1 class="text-primary margin-top-0">USERS</h1>
+  }
+  
   <!-- Filter -->
   <app-filter [filterData]="usersFilterData" (applyFilters)="filterDataEvent($event)"></app-filter>
 
@@ -18,7 +28,11 @@
       </ng-container>
       
       <tr style="font-weight: bolder;" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row
+          *matRowDef="let row;
+          columns: displayedColumns;"
+          [ngClass]="dialogRef ? 'clickable' : ''"
+          (click)="onRowClicked(row)"></tr>
     </table>
 
     <mat-paginator 

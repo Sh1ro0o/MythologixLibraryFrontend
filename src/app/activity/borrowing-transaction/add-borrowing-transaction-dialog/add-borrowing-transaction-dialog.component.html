@@ -16,10 +16,22 @@
     <!-- Book Copy Id -->
     <div class="form-group">
       <label class="filter-label">Book Copy Id:</label>
-      <input
-        class="dialog-input"
-        type="text"
-        formControlName="bookCopyId" />
+      <div fxLayout="row wrap" fxLayoutAlign="start start">
+        <!-- Book Copy id display-->
+        <input
+          [fxFlex]="68"
+          class="dialog-input margin-right-5"
+          type="text"
+          formControlName="bookCopyId" />
+        <button mat-button
+          [fxFlex]="30"
+          class="filtering-button margin-5"
+          style="margin: 0; height: 30px;"
+          (click)="openBookCopiesDialog()"
+          matTooltip="SelectUser"
+          [matTooltipPosition]="'below'"><span class="text-primary">Select BC</span>
+				</button>
+      </div>
     </div>
 
     <!-- User Id -->

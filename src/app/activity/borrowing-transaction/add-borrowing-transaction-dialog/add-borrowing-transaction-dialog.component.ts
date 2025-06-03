@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UsersComponent } from '../../../admin/users/users.component';
 import { UserData } from '../../../Models/data/user-data';
+import { BookCopyComponent } from '../../../Library/book-copy/book-copy.component';
+import { BookCopyData } from '../../../Models/data/book-copy-data';
 
 @Component({
   selector: 'app-add-borrowing-transaction-dialog',
@@ -16,13 +18,14 @@ export class AddBorrowingTransactionDialogComponent implements OnInit {
   readonly dialog = inject(MatDialog);
 
   selectedUser?: UserData;
+  selectedBookCopy?: BookCopyData;
 
   addBorrowingTransactionGroup!: FormGroup;
 
   ngOnInit(): void {
     this.addBorrowingTransactionGroup = this.fb.group({
       dueDate: ['', Validators.required],
-      bookCopyId: ['', Validators.required],
+      bookCopyId: [{value: '', disabled: true}, Validators.required],
       userId: [{value: '', disabled: true}, Validators.required]
     });
   }
@@ -38,6 +41,21 @@ export class AddBorrowingTransactionDialogComponent implements OnInit {
       if (resUser) {
         this.selectedUser = resUser;
         this.addBorrowingTransactionGroup.get('userId')?.setValue(this.selectedUser.id);
+      }
+    });
+  }
+
+  openBookCopiesDialog() {
+    const bookCopiesDialogRef = this.dialog.open(BookCopyComponent, {
+      width: '80vw',
+      maxWidth: '100vw',
+      height: '80vh'
+    });
+
+    bookCopiesDialogRef.afterClosed().subscribe((resBookCopy: BookCopyData | null) => {
+      if (resBookCopy) {
+        this.selectedBookCopy = resBookCopy;
+        this.addBorrowingTransactionGroup.get('bookCopyId')?.setValue(this.selectedBookCopy.bookId);
       }
     });
   }

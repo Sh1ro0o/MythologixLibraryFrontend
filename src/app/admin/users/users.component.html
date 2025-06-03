@@ -17,14 +17,14 @@
     <table mat-table [dataSource]="usersDataSource" matSort>
       <!-- Email Column -->
       <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-        <td mat-cell *matCellDef="let row"> {{ row.email }} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 450px"> Email </th>
+        <td mat-cell *matCellDef="let row" style="width: 450px"> {{ row.email }} </td>
       </ng-container>
 
       <!-- Id Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 450px"> Id </th>
-        <td mat-cell *matCellDef="let row" style="width: 450px"> {{ row.id }} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let row"> {{ row.id }} </td>
       </ng-container>
       
       <tr style="font-weight: bolder;" mat-header-row *matHeaderRowDef="displayedColumns"></tr>

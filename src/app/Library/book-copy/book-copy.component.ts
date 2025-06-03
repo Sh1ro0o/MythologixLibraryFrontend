@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ViewChild } from '@angular/core';
+import { Component, DestroyRef, Optional, ViewChild } from '@angular/core';
 import { BookCopyData } from '../../Models/data/book-copy-data';
 import { GetBookCopyRequest } from '../../Models/Requests/get.book-copy.request';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -12,6 +12,7 @@ import { ResponseData } from '../../Models/Responses/response-data';
 import { LibraryService } from '../../services/library.service';
 import { LoadingService } from '../../services/loading.service';
 import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-book-copy',
@@ -25,7 +26,7 @@ export class BookCopyComponent {
   bookCopiesFilterData: FilterData[] = [];
   //angular material table data
   bookCopiesDataSource: MatTableDataSource<BookCopyData, MatPaginator> = new MatTableDataSource();
-  displayedColumns: string[] = ['serialNumber', 'bookTitle', 'isAvailable'];
+  displayedColumns: string[] = ['recordId' ,'serialNumber', 'bookTitle', 'isAvailable'];
   
   bookCopiesRequest: GetBookCopyRequest = new GetBookCopyRequest();
 
@@ -41,6 +42,7 @@ export class BookCopyComponent {
     private libraryService: LibraryService,
     private loadingService: LoadingService,
     private destroyRef: DestroyRef,
+    @Optional() public dialogRef?: MatDialogRef<BookCopyComponent>
   ) { }
 
   ngOnInit(): void {
@@ -73,6 +75,14 @@ export class BookCopyComponent {
         //this.loginMessage = err?.error?.message || 'Log in failed. Please contact our support for help.';
       }
     });
+  }
+
+  closeDialog(): void {
+    this.dialogRef?.close();
+  }
+
+  onRowClicked(bookCopy: BookCopyData): void {
+    this.dialogRef?.close(bookCopy);
   }
 
   //pagination

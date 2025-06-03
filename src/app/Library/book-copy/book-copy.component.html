@@ -11,7 +11,8 @@
   <!-- Filter -->
   <app-filter [filterData]="bookCopiesFilterData" (applyFilters)="filterDataEvent($event)"></app-filter>
 
-  <div class="table-wrapper margin-top-10">
+  <div class="table-wrapper margin-top-10"
+       [appLoadingCircle]="loadingService.loading$ | async">
     <table mat-table [dataSource]="bookCopiesDataSource" matSort>
       <!-- Id Column -->
       <ng-container matColumnDef="recordId">

@@ -5,6 +5,8 @@ import { UsersComponent } from '../../../admin/users/users.component';
 import { UserData } from '../../../Models/data/user-data';
 import { BookCopyComponent } from '../../../Library/book-copy/book-copy.component';
 import { BookCopyData } from '../../../Models/data/book-copy-data';
+import { PostBorrowingTransactionRequest } from '../../../Models/Requests/post.borrowing-transaction.request';
+import { LoadingService } from '../../../services/loading.service';
 
 @Component({
   selector: 'app-add-borrowing-transaction-dialog',
@@ -14,6 +16,7 @@ import { BookCopyData } from '../../../Models/data/book-copy-data';
 })
 export class AddBorrowingTransactionDialogComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<AddBorrowingTransactionDialogComponent>);
+  readonly loadingService = inject(LoadingService);
   readonly fb = inject(FormBuilder);
   readonly dialog = inject(MatDialog);
 
@@ -21,6 +24,7 @@ export class AddBorrowingTransactionDialogComponent implements OnInit {
   selectedBookCopy?: BookCopyData;
 
   addBorrowingTransactionGroup!: FormGroup;
+  isMissingFilledFields: boolean = false;
 
   ngOnInit(): void {
     this.addBorrowingTransactionGroup = this.fb.group({
@@ -65,6 +69,20 @@ export class AddBorrowingTransactionDialogComponent implements OnInit {
   }
 
   onAdd(): void {
-    //return data to add
+    if (this.addBorrowingTransactionGroup.valid) {
+      const dueDate = this.addBorrowingTransactionGroup.get('dueDate')?.value;
+      const bookCopyId = this.addBorrowingTransactionGroup.get('bookCopyId')?.value;
+      const userId = this.addBorrowingTransactionGroup.get('userId')?.value;
+
+      const postRequest: PostBorrowingTransactionRequest = new PostBorrowingTransactionRequest(dueDate, bookCopyId, userId);
+
+      console.log(postRequest);
+
+      //this.dialogRef.close();
+    }
+    else {
+      this.isMissingFilledFields = true;
+      this.addBorrowingTransactionGroup.markAllAsTouched();
+    }
   }
 }

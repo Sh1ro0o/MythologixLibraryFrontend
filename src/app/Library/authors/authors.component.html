@@ -3,7 +3,8 @@
   <!-- Filter -->
   <app-filter [filterData]="authorsFilterData" (applyFilters)="filterDataEvent($event)"></app-filter>
 
-  <div class="table-wrapper margin-top-10">
+  <div class="table-wrapper margin-top-10"
+       [appLoadingCircle]="loadingService.loading$ | async">
     <table mat-table [dataSource]="authorsDataSource" matSort>
       <!-- First Name Column -->
       <ng-container matColumnDef="firstName">

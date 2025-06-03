@@ -1,4 +1,5 @@
-<div [formGroup]="addBorrowingTransactionGroup" class="dialog-container">
+<div [formGroup]="addBorrowingTransactionGroup" class="dialog-container"
+     [appLoadingCircle]="loadingService.loading$ | async">
   <div fxLayout="row" fxLayoutAlign="space-between start">
 	  <h2 class="text-primary margin-top-0">ADD BORROWED BOOK</h2>
     <mat-icon class="text-primary clickable" (click)="closeDialog()">close</mat-icon>
@@ -6,7 +7,7 @@
   <div class="form-grid">
     <!-- Due Date -->
     <div class="form-group">
-      <label class="filter-label">Due Date:</label>
+      <label class="filter-label">Due Date: (*)</label>
       <input
         class="dialog-input"
         type="date"
@@ -15,7 +16,7 @@
 
     <!-- Book Copy Id -->
     <div class="form-group">
-      <label class="filter-label">Book Copy Id:</label>
+      <label class="filter-label">Book Copy Id: (*)</label>
       <div fxLayout="row wrap" fxLayoutAlign="start start">
         <!-- Book Copy id display-->
         <input
@@ -36,7 +37,7 @@
 
     <!-- User Id -->
     <div class="form-group">
-      <label class="filter-label">User Id:</label>
+      <label class="filter-label">User Id: (*)</label>
       <div fxLayout="row wrap" fxLayoutAlign="start start">
         <!-- User id display -->
         <input
@@ -67,4 +68,8 @@
 						[matTooltipPosition]="'left'"><span class="text-primary">Add</span>
 				</button>
 	</div>
+  
+  @if (isMissingFilledFields) {
+    <p class="text-error">Please fill all the spaces marked with (*)</p>
+  }
 </div>

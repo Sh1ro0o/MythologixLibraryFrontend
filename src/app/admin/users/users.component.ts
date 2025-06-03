@@ -13,6 +13,7 @@ import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
 import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
 import { MatDialogRef } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users',
@@ -40,7 +41,7 @@ export class UsersComponent {
 
   constructor(
     private adminService: AdminService,
-    private loadingService: LoadingService,
+    public loadingService: LoadingService,
     private destroyRef: DestroyRef,
     @Optional() public dialogRef?: MatDialogRef<UsersComponent>
   ) { }
@@ -72,7 +73,6 @@ export class UsersComponent {
         }
       },
       error: (err) => {
-        //this.loginMessage = err?.error?.message || 'Log in failed. Please contact our support for help.';
       }
     });
   }

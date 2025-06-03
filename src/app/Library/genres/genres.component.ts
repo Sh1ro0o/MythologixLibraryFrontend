@@ -39,7 +39,7 @@ export class GenresComponent {
 
   constructor(
     private libraryService: LibraryService,
-    private loadingService: LoadingService,
+    public loadingService: LoadingService,
     private destroyRef: DestroyRef,
   ) { }
 

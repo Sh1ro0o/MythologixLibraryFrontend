@@ -40,7 +40,7 @@ export class BookCopyComponent {
 
   constructor(
     private libraryService: LibraryService,
-    private loadingService: LoadingService,
+    public loadingService: LoadingService,
     private destroyRef: DestroyRef,
     @Optional() public dialogRef?: MatDialogRef<BookCopyComponent>
   ) { }

@@ -1,6 +1,5 @@
 <div [ngClass]="dialogRef ? 'dialog-container' : 'main-content-wrapper'">
   @if (dialogRef) {
-    
     <div fxLayout="row" fxLayoutAlign="space-between start">
       <h2 class="text-primary margin-top-0">USERS</h2>
       <mat-icon class="text-primary clickable" (click)="closeDialog()">close</mat-icon>
@@ -13,7 +12,8 @@
   <!-- Filter -->
   <app-filter [filterData]="usersFilterData" (applyFilters)="filterDataEvent($event)"></app-filter>
 
-  <div class="table-wrapper margin-top-10">
+  <div class="table-wrapper margin-top-10"
+       [appLoadingCircle]="loadingService.loading$ | async">
     <table mat-table [dataSource]="usersDataSource" matSort>
       <!-- Email Column -->
       <ng-container matColumnDef="email">

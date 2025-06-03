@@ -40,7 +40,7 @@ export class AuthorsComponent implements OnInit {
 
   constructor(
     private libraryService: LibraryService,
-    private loadingService: LoadingService,
+    public loadingService: LoadingService,
     private destroyRef: DestroyRef,
   ) { }
 

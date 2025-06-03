@@ -4,7 +4,8 @@
   <app-filter [filterData]="booksFilterData" (applyFilters)="filterDataEvent($event)"></app-filter>
 
   <!-- BOOKS TABLE -->
-  <div class="table-wrapper margin-top-10">
+  <div class="table-wrapper margin-top-10"
+       [appLoadingCircle]="loadingService.loading$ | async">
     <table mat-table [dataSource]="booksDataSource" matSort>
       <!-- Title Column -->
       <ng-container matColumnDef="title">

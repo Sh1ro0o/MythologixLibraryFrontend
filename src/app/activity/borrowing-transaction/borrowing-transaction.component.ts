@@ -46,7 +46,7 @@ export class BorrowingTransactionComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private activityService: ActivityService,
-    private loadingService: LoadingService,
+    public loadingService: LoadingService,
     private destroyRef: DestroyRef,
     private dialog: MatDialog,
   ) { }

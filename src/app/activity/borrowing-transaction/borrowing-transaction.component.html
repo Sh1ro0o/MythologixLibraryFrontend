@@ -17,6 +17,12 @@
   <div class="table-wrapper margin-top-10"
        [appLoadingCircle]="loadingService.loading$ | async">
     <table mat-table [dataSource]="borrowingDataSource" matSort>
+      <!-- Book Copy Serial Number Column -->
+      <ng-container matColumnDef="bookCopySerialNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Serial Number </th>
+        <td mat-cell *matCellDef="let row"> {{row.bookCopySerialNumber}} </td>
+      </ng-container>
+
       <!-- Email Column -->
       <ng-container matColumnDef="userEmail">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>

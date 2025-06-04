@@ -31,7 +31,7 @@ export class BorrowingTransactionComponent implements OnInit {
 
   //angular material table data
   borrowingDataSource: MatTableDataSource<BorrowingTransactionData, MatPaginator> = new MatTableDataSource();
-  displayedColumns: string[] = ['userEmail', 'borrowDate', 'dueDate', 'returnedDate'];
+  displayedColumns: string[] = ['bookCopySerialNumber' ,'userEmail', 'borrowDate', 'dueDate', 'returnedDate'];
 
   borrowingTransactionRequest: GetBorrowingTransactionRequest = new GetBorrowingTransactionRequest();
   title: string = 'BORROWED';
@@ -105,7 +105,7 @@ export class BorrowingTransactionComponent implements OnInit {
         this.dialog.open(AlertDialogComponent, {
           data: {
             title: 'Error!',
-            content: err?.error?.message ?? err?.error?.title,
+            content: err?.error?.message ?? err?.error?.title ?? 'Error occured!',
           }
         });
       }

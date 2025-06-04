@@ -80,7 +80,7 @@ export class GenresComponent {
         this.dialog.open(AlertDialogComponent, {
           data: {
             title: 'Error!',
-            content: err?.error?.message ?? err?.error?.title,
+            content: err?.error?.message ?? err?.error?.title ?? 'Error occured!',
           }
         });
       }

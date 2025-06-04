@@ -18,6 +18,8 @@ import { GetGenresRequest } from '../../Models/Requests/get.genres.request';
 import { CustomKeyValue } from '../../Models/data/key-value';
 import { forkJoin, Observable } from 'rxjs';
 import { GetAuthorsRequest } from '../../Models/Requests/get.authors.request';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AlertDialogComponent } from '../../shared/components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-books',
@@ -50,26 +52,43 @@ export class BooksComponent implements OnInit {
     private libraryService: LibraryService,
     public loadingService: LoadingService,
     private destroyRef: DestroyRef,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
-    //main data GET
+    //GET main
     this.getBookData();
-    
-    //filtering GET
+
+    //GET filters
     forkJoin({
       genresRes: this.getGenresData(),
       authorsRes: this.getAuthorsData()
-    }).subscribe(({ genresRes, authorsRes }) => {
-      if (genresRes.data) {
-        this.genres = genresRes.data;
-      }
-      if (authorsRes.data) {
-        this.authors = authorsRes.data;
-      }
+    }).subscribe({
+      next: ({ genresRes, authorsRes }) => {
+        if (genresRes.data) {
+          this.genres = genresRes.data;
+        }
+        if (authorsRes.data) {
+          this.authors = authorsRes.data;
+        }
 
-      //initialize filters
-      this.booksFilterData = this.initializeFilters();
+        //initialize filters
+        this.booksFilterData = this.initializeFilters();
+      },
+      error: (err) => {
+        const isAlreadyOpen = this.dialog.openDialogs.some(
+          dialogRef => dialogRef.componentInstance instanceof AlertDialogComponent
+        );
+
+        if (!isAlreadyOpen) {
+          this.dialog.open(AlertDialogComponent, {
+            data: {
+              title: 'Error!',
+              content: err?.error?.message ?? err?.statusText,
+            }
+          });
+        }
+      }
     });
   }
 
@@ -95,7 +114,18 @@ export class BooksComponent implements OnInit {
         }
       },
       error: (err) => {
-        //this.loginMessage = err?.error?.message || 'Log in failed. Please contact our support for help.';
+        const isAlreadyOpen = this.dialog.openDialogs.some(
+          dialogRef => dialogRef.componentInstance instanceof AlertDialogComponent
+        );
+
+        if (!isAlreadyOpen) {
+          this.dialog.open(AlertDialogComponent, {
+            data: {
+              title: 'Error!',
+              content: err?.error?.message ?? err?.statusText,
+            }
+          });
+        }
       }
     });
   }

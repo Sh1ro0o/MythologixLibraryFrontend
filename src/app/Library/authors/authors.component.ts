@@ -13,6 +13,8 @@ import { ResponseData } from '../../Models/Responses/response-data';
 import { FilterData } from '../../Models/data/filter-data';
 import { FormControl } from '@angular/forms';
 import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from '../../shared/components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-authors',
@@ -42,6 +44,7 @@ export class AuthorsComponent implements OnInit {
     private libraryService: LibraryService,
     public loadingService: LoadingService,
     private destroyRef: DestroyRef,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -71,7 +74,12 @@ export class AuthorsComponent implements OnInit {
         }
       },
       error: (err) => {
-        //this.loginMessage = err?.error?.message || 'Log in failed. Please contact our support for help.';
+        this.dialog.open(AlertDialogComponent, {
+          data: {
+            title: 'Error!',
+            content: err?.error?.message ?? err?.statusText,
+          }
+        });
       }
     });
   }

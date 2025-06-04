@@ -12,6 +12,8 @@ import { LoadingService } from '../../services/loading.service';
 import { FormControl } from '@angular/forms';
 import { FilterData } from '../../Models/data/filter-data';
 import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from '../../shared/components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-genres',
@@ -41,6 +43,7 @@ export class GenresComponent {
     private libraryService: LibraryService,
     public loadingService: LoadingService,
     private destroyRef: DestroyRef,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -74,7 +77,12 @@ export class GenresComponent {
         }
       },
       error: (err) => {
-        //this.loginMessage = err?.error?.message || 'Log in failed. Please contact our support for help.';
+        this.dialog.open(AlertDialogComponent, {
+          data: {
+            title: 'Error!',
+            content: err?.error?.message ?? err?.statusText,
+          }
+        });
       }
     });
   }

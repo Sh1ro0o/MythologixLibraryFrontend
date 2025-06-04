@@ -1,0 +1,9 @@
+@use '../../../../assets/styles/variables' as *;
+
+.alert-dialog-text-box {
+    background-color: $text-background;
+    border: 1px solid $background-active;
+    padding: 5px 10px 50px 10px;
+    max-height: 8vh;
+    overflow-y: auto;
+}

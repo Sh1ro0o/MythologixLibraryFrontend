@@ -7,12 +7,14 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { RouterModule } from "@angular/router";
 import { FilterComponent } from './components/filter/filter.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
 
 @NgModule({
   declarations: [
     LoadingCircleDirective,
     TreeComponent,
     FilterComponent,
+    AlertDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +27,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     LoadingCircleDirective,
     TreeComponent,
     FilterComponent,
+    AlertDialogComponent,
   ]
 })
 export class SharedModule {}

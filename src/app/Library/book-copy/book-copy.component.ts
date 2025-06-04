@@ -12,7 +12,8 @@ import { ResponseData } from '../../Models/Responses/response-data';
 import { LibraryService } from '../../services/library.service';
 import { LoadingService } from '../../services/loading.service';
 import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AlertDialogComponent } from '../../shared/components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-book-copy',
@@ -42,6 +43,7 @@ export class BookCopyComponent {
     private libraryService: LibraryService,
     public loadingService: LoadingService,
     private destroyRef: DestroyRef,
+    private dialog: MatDialog,
     @Optional() public dialogRef?: MatDialogRef<BookCopyComponent>
   ) { }
 
@@ -72,7 +74,12 @@ export class BookCopyComponent {
         }
       },
       error: (err) => {
-        //this.loginMessage = err?.error?.message || 'Log in failed. Please contact our support for help.';
+        this.dialog.open(AlertDialogComponent, {
+          data: {
+            title: 'Error!',
+            content: err?.error?.message ?? err?.statusText,
+          }
+        });
       }
     });
   }

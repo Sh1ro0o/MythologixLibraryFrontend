@@ -75,7 +75,7 @@ export class RegisterComponent implements OnInit {
         },
         error: (err) => {
           this.loginFailed = true;
-          this.loginMessage = err?.error?.message || 'Log in failed. Please contact our support for help.';
+          this.loginMessage = err?.error?.message || 'Register failed. Please contact our support for help.';
         }
       });
     }

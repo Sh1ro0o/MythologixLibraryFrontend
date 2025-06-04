@@ -16,6 +16,7 @@ import { FormControl } from '@angular/forms';
 import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { AddBorrowingTransactionDialogComponent } from './add-borrowing-transaction-dialog/add-borrowing-transaction-dialog.component';
+import { AlertDialogComponent } from '../../shared/components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-borrowing-transaction',
@@ -101,7 +102,12 @@ export class BorrowingTransactionComponent implements OnInit {
         }
       },
       error: (err) => {
-        //this.loginMessage = err?.error?.message || 'Log in failed. Please contact our support for help.';
+        this.dialog.open(AlertDialogComponent, {
+          data: {
+            title: 'Error!',
+            content: err?.error?.message ?? err?.statusText,
+          }
+        });
       }
     });
   }

@@ -21,7 +21,7 @@ import { SharedModule } from "../shared/shared.module";
         AuthRoutingModule, //Routes
         MaterialModule,
         FlexLayoutModule,
-        SharedModule
+        SharedModule,
     ]
   })
   export class AuthModule {}

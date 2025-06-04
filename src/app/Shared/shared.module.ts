@@ -8,6 +8,8 @@ import { RouterModule } from "@angular/router";
 import { FilterComponent } from './components/filter/filter.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
+import { BookCopyComponent } from "../Library/book-copy/book-copy.component";
+import { UsersComponent } from "../admin/users/users.component";
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.com
     TreeComponent,
     FilterComponent,
     AlertDialogComponent,
+    BookCopyComponent, //Library
+    UsersComponent, //Admin
   ],
   imports: [
     CommonModule,

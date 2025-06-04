@@ -6,7 +6,7 @@ import { MaterialModule } from "../shared/modules/material.module";
 import { SharedModule } from "../shared/shared.module";
 import { ActivityRoutingModule } from "./activity-routing.module";
 import { BorrowingTransactionComponent } from './borrowing-transaction/borrowing-transaction.component';
-import { AddBorrowingTransactionDialogComponent } from './borrowing-transaction/add-borrowing-transaction-dialog/add-borrowing-transaction-dialog.component';
+import { AddBorrowingTransactionDialogComponent } from "./borrowing-transaction/add-borrowing-transaction-dialog/add-borrowing-transaction-dialog.component";
 
 
 @NgModule({
@@ -15,12 +15,12 @@ import { AddBorrowingTransactionDialogComponent } from './borrowing-transaction/
     AddBorrowingTransactionDialogComponent,
   ],
   imports: [
-      CommonModule,
-      ReactiveFormsModule,
-      ActivityRoutingModule, //Routes
-      MaterialModule,
-      FlexLayoutModule,
-      SharedModule,
+    CommonModule,
+    ReactiveFormsModule,
+    ActivityRoutingModule, //Routes
+    MaterialModule,
+    FlexLayoutModule,
+    SharedModule,
   ]
 })
 export class ActivityModule {}

@@ -19,7 +19,7 @@ import { SharedModule } from "../shared/shared.module";
     MaterialModule,
     FlexLayoutModule,
     RouterModule,
-    SharedModule
+    SharedModule,
 ]
 })
 export class LayoutModule {}

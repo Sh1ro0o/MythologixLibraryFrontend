@@ -16,7 +16,7 @@
   <!-- BORROWING TRANSACTIONS TABLE -->
   <div class="table-wrapper margin-top-10"
        [appLoadingCircle]="loadingService.loading$ | async">
-    <table mat-table [dataSource]="borrowingTransactions" matSort>
+    <table mat-table [dataSource]="borrowingDataSource" matSort>
       <!-- Email Column -->
       <ng-container matColumnDef="userEmail">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>

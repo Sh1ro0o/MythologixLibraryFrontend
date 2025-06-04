@@ -84,7 +84,7 @@ export class BooksComponent implements OnInit {
           this.dialog.open(AlertDialogComponent, {
             data: {
               title: 'Error!',
-              content: err?.error?.message ?? err?.statusText,
+              content: err?.error?.message ?? err?.error?.title,
             }
           });
         }
@@ -122,7 +122,7 @@ export class BooksComponent implements OnInit {
           this.dialog.open(AlertDialogComponent, {
             data: {
               title: 'Error!',
-              content: err?.error?.message ?? err?.statusText,
+              content: err?.error?.message ?? err?.error?.title,
             }
           });
         }

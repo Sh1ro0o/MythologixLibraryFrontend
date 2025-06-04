@@ -77,7 +77,7 @@ export class BookCopyComponent {
         this.dialog.open(AlertDialogComponent, {
           data: {
             title: 'Error!',
-            content: err?.error?.message ?? err?.statusText,
+            content: err?.error?.message ?? err?.error?.title,
           }
         });
       }

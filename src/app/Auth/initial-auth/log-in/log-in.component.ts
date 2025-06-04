@@ -68,7 +68,6 @@ export class LogInComponent implements OnInit {
       });
     }
     else {
-      console.log('form not submitted');
       this.loginForm.markAllAsTouched();
     }
   }

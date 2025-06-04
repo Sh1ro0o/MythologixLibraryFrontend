@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UsersComponent } from '../../../admin/users/users.component';
@@ -7,6 +7,10 @@ import { BookCopyComponent } from '../../../Library/book-copy/book-copy.componen
 import { BookCopyData } from '../../../Models/data/book-copy-data';
 import { PostBorrowingTransactionRequest } from '../../../Models/Requests/post.borrowing-transaction.request';
 import { LoadingService } from '../../../services/loading.service';
+import { ActivityService } from '../../../services/activity.service';
+import { withLoading } from '../../../core/operators/with-loading.operator';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AlertDialogComponent } from '../../../shared/components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-add-borrowing-transaction-dialog',
@@ -15,10 +19,12 @@ import { LoadingService } from '../../../services/loading.service';
   styleUrl: './add-borrowing-transaction-dialog.component.scss'
 })
 export class AddBorrowingTransactionDialogComponent implements OnInit {
-  readonly dialogRef = inject(MatDialogRef<AddBorrowingTransactionDialogComponent>);
+  private readonly dialogRef = inject(MatDialogRef<AddBorrowingTransactionDialogComponent>);
   readonly loadingService = inject(LoadingService);
-  readonly fb = inject(FormBuilder);
-  readonly dialog = inject(MatDialog);
+  private readonly activityService = inject(ActivityService);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly fb = inject(FormBuilder);
+  private readonly dialog = inject(MatDialog);
 
   selectedUser?: UserData;
   selectedBookCopy?: BookCopyData;
@@ -74,11 +80,23 @@ export class AddBorrowingTransactionDialogComponent implements OnInit {
       const bookCopyId = this.addBorrowingTransactionGroup.get('bookCopyId')?.value;
       const userId = this.addBorrowingTransactionGroup.get('userId')?.value;
 
-      const postRequest: PostBorrowingTransactionRequest = new PostBorrowingTransactionRequest(dueDate, bookCopyId, userId);
-
-      console.log(postRequest);
-
-      //this.dialogRef.close();
+      const postRequest: PostBorrowingTransactionRequest = new PostBorrowingTransactionRequest(dueDate, userId, bookCopyId);
+      this.activityService.postBorrowingTransaction(postRequest).pipe(
+        withLoading(this.loadingService),
+        takeUntilDestroyed(this.destroyRef)
+      ).subscribe({
+        next: (borrowingTransaction) => {
+          this.dialogRef.close(borrowingTransaction);
+        },
+        error: (err) => {
+          this.dialog.open(AlertDialogComponent, {
+            data: {
+              title: 'Error!',
+              content: err?.error?.message ?? err?.error?.title,
+            }
+          });
+        }
+      });
     }
     else {
       this.isMissingFilledFields = true;

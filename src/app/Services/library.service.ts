@@ -22,6 +22,7 @@ export class LibraryService {
 
   constructor(private http: HttpClient) { }
 
+  //GET
   getBooks(getBookRequest: GetBooksRequest): Observable<ResponseData<BookData[]>> {
     return this.http.get<ResponseData<BookData[]>>(this.apiUrl + '/Book/allBooks', {params: toHttpParams(getBookRequest)});
   }

@@ -105,7 +105,7 @@ export class BorrowingTransactionComponent implements OnInit {
         this.dialog.open(AlertDialogComponent, {
           data: {
             title: 'Error!',
-            content: err?.error?.message ?? err?.statusText,
+            content: err?.error?.message ?? err?.error?.title,
           }
         });
       }
@@ -113,11 +113,20 @@ export class BorrowingTransactionComponent implements OnInit {
   }
 
   addBorrowingTransaction() {
-    this.dialog.open(AddBorrowingTransactionDialogComponent, {
+    const addDialogRef = this.dialog.open(AddBorrowingTransactionDialogComponent, {
       width: '50vw',
       maxWidth: '100vw',
       height: '50vh'
     });
+
+    //on successful add we push the newly created borrowingTransaction to our table
+    addDialogRef.afterClosed().subscribe({
+      next: (borrowingTransaction: BorrowingTransactionData | null) => {
+        if(borrowingTransaction) {
+          this.getBorrowingTransactions();
+        }
+      }
+    })
   }
 
   //pagination

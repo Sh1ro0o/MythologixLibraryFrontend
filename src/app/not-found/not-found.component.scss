@@ -1,0 +1,12 @@
+@use '../../assets/styles/variables' as *;
+
+.not-found-content {
+  background-color: $background-default;
+  height: 100%;
+}
+
+.not-found-text {
+	text-align: center;
+	padding-top: 5%;
+	margin: 0;
+}

@@ -12,7 +12,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
 import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AlertDialogComponent } from '../../shared/components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-users',
@@ -42,6 +43,7 @@ export class UsersComponent {
     private adminService: AdminService,
     public loadingService: LoadingService,
     private destroyRef: DestroyRef,
+    private dialog: MatDialog,
     @Optional() public dialogRef?: MatDialogRef<UsersComponent>
   ) { }
 
@@ -72,7 +74,12 @@ export class UsersComponent {
         }
       },
       error: (err) => {
-        
+        this.dialog.open(AlertDialogComponent, {
+          data: {
+            title: 'Error!',
+            content: err?.error?.message ?? err?.error?.title ?? 'Error occured!',
+          }
+        });
       }
     });
   }

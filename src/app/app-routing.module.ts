@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutComponent } from './layout/layout.component';
+import { DomainGuard } from './guards/domain.guard';
+import { UserContentGuard } from './guards/user-content.guard';
+import { LoginRegisterGuard } from './guards/login-register.guard';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AdminContentGuard } from './guards/admin-content.guard';
 
 const routes: Routes = [
   //Layout
@@ -9,15 +14,24 @@ const routes: Routes = [
     path: '', 
     component: LayoutComponent,
     children: [
-      { path: 'library', loadChildren: () => import('./Library/library.module').then(m => m.LibraryModule) },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
-      { path: 'activity', loadChildren: () => import('./activity/activity.module').then(m => m.ActivityModule) },
+      { path: '', component: DashboardComponent, canActivate: [DomainGuard] },
+      { path: 'library', canActivate: [UserContentGuard], loadChildren: () => import('./Library/library.module').then(m => m.LibraryModule) },
+      { path: 'dashboard', canActivate: [UserContentGuard], component: DashboardComponent },
+      { path: 'admin', canActivate: [AdminContentGuard], loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+      { path: 'activity', canActivate: [UserContentGuard], loadChildren: () => import('./activity/activity.module').then(m => m.ActivityModule) },
     ]
   },
 
   //Lazy loading
-  { path: 'auth', loadChildren: () => import('./Auth/auth.module').then(m => m.AuthModule) },
+  { 
+    path: 'auth', canActivate: [LoginRegisterGuard], loadChildren: () => import('./Auth/auth.module').then(m => m.AuthModule)
+  },
+
+  //Not Found
+  {
+    path: '**',
+    component: NotFoundComponent
+  }
 ];
 
 @NgModule({

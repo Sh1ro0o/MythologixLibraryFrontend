@@ -57,6 +57,9 @@ export class LogInComponent implements OnInit {
           //store token data in local storage
           this.localStorage.set(LocalStorageKey.Token, response?.data?.token);
           this.localStorage.set(LocalStorageKey.Expiration, response?.data?.expiresOn);
+          this.localStorage.set(LocalStorageKey.Roles, response?.data?.roles);
+
+          console.log(this.authService.isAdmin());
 
           //redirect to dashbouard
           this.router.navigate(['dashboard']);

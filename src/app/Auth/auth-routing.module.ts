@@ -16,11 +16,11 @@ const authRoutes: Routes = [
       },
       { 
         path: 'log-in', 
-        component: LogInComponent 
+        component: LogInComponent,
       },
       { 
         path: 'register', 
-        component: RegisterComponent 
+        component: RegisterComponent,
       }
     ]
   },

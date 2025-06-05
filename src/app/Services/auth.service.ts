@@ -9,6 +9,7 @@ import { LocalStorageKey } from '../shared/Enums/local-storage-key.enum';
 import { ResponseData } from '../Models/Responses/response-data';
 import { AuthData } from '../Models/data/auth-data';
 import { RegisterRequest } from '../Models/Requests/register.request';
+import { Role } from '../shared/Enums/role.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -27,12 +28,24 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    let expiresOn: Date | null = this.localStorage.get<Date>(LocalStorageKey.Expiration);
+    let expiresString: string | null = this.localStorage.get<string>(LocalStorageKey.Expiration);
 
-    if(expiresOn) {
+    if(expiresString) {
+      const expiresOn = new Date(expiresString);
       return expiresOn.getTime() > Date.now();
     }
     
+    return false;
+  }
+
+  isAdmin(): boolean {
+    let roles = this.localStorage.get<string[]>(LocalStorageKey.Roles);
+    console.log(roles);
+
+    if (roles) {
+      return roles?.some(x => x === Role.Admin);
+    }
+
     return false;
   }
 

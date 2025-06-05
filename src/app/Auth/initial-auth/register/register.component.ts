@@ -69,6 +69,7 @@ export class RegisterComponent implements OnInit {
           //store token data in local storage
           this.localStorage.set(LocalStorageKey.Token, response?.data?.token);
           this.localStorage.set(LocalStorageKey.Expiration, response?.data?.expiresOn);
+          this.localStorage.set(LocalStorageKey.Roles, response?.data?.roles);
 
           //redirect to dashbouard
           this.router.navigate(['dashboard']);

@@ -40,7 +40,6 @@ export class AuthService {
 
   isAdmin(): boolean {
     let roles = this.localStorage.get<string[]>(LocalStorageKey.Roles);
-    console.log(roles);
 
     if (roles) {
       return roles?.some(x => x === Role.Admin);

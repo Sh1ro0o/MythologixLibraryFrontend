@@ -59,8 +59,6 @@ export class LogInComponent implements OnInit {
           this.localStorage.set(LocalStorageKey.Expiration, response?.data?.expiresOn);
           this.localStorage.set(LocalStorageKey.Roles, response?.data?.roles);
 
-          console.log(this.authService.isAdmin());
-
           //redirect to dashbouard
           this.router.navigate(['dashboard']);
         },

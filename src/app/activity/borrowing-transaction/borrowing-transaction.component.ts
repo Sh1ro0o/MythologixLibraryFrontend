@@ -17,6 +17,7 @@ import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { AddBorrowingTransactionDialogComponent } from './add-borrowing-transaction-dialog/add-borrowing-transaction-dialog.component';
 import { AlertDialogComponent } from '../../shared/components/alert-dialog/alert-dialog.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-borrowing-transaction',
@@ -35,6 +36,7 @@ export class BorrowingTransactionComponent implements OnInit {
 
   borrowingTransactionRequest: GetBorrowingTransactionRequest = new GetBorrowingTransactionRequest();
   title: string = 'BORROWED';
+  isAdmin: boolean = false;
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -48,11 +50,14 @@ export class BorrowingTransactionComponent implements OnInit {
     private route: ActivatedRoute,
     private activityService: ActivityService,
     public loadingService: LoadingService,
+    public authService: AuthService,
     private destroyRef: DestroyRef,
     private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
+
     const status = this.route.snapshot.data['status'];
 
     switch (status) {

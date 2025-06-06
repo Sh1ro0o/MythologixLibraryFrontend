@@ -4,13 +4,15 @@
   	<!-- Filter Button -->
   	<app-filter [filterData]="borrowingFilterData" (applyFilters)="filterDataEvent($event)"></app-filter>
 		<!-- Add Button -->
-		<button mat-button
-						class="filtering-button margin-bot-10"
-						matTooltip="Add transaction"
-						[matTooltipPosition]="'right'"
-            (click)="addBorrowingTransaction()">
-			<mat-icon class="text-primary margin-0">add</mat-icon>
-		</button>
+    @if (isAdmin) {
+      <button mat-button
+              class="filtering-button margin-bot-10"
+              matTooltip="Add transaction"
+              [matTooltipPosition]="'right'"
+              (click)="addBorrowingTransaction()">
+        <mat-icon class="text-primary margin-0">add</mat-icon>
+      </button>
+    }
 	</div>
 
   <!-- BORROWING TRANSACTIONS TABLE -->

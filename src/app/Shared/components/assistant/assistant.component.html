@@ -1,0 +1,75 @@
+<!-- Chat bubble -->
+@if (!showChatWindow) {
+    <div class="assistant-circle-container clickable"
+         (click)="showChatWindow = !showChatWindow">
+        <img class="assistant-icon" src="Images/assistant-icon.png">
+    </div>
+}
+<!-- Chat Window -->
+@else {
+    <mat-card class="assistant-card">
+        <!-- Header -->
+        <mat-card-header class="assistant-card-header">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <div class="assistant-header-container">
+                    <img class="assistant-icon" src="Images/assistant-icon.png">
+                </div>
+                <p class="text-primary">Hermes</p>
+                <div class="bot text-secondary">AI</div>
+                <div>
+                    <div class="clickable"
+                         (click)="showChatWindow = !showChatWindow">
+                        <mat-icon class="text-primary close-chat"
+                                  >minimize</mat-icon>
+                    </div>
+                    
+                </div>
+            </div>
+        </mat-card-header>
+
+        <!-- Content-->
+        <mat-card-content #chatContainer class="assistant-card-content">
+            @for (chatBubble of chatBubbles; track $index) {
+                @if (chatBubble.senderType === senderTypeEnum.Assistant) {
+                    <div class="chat-bubble assistant">
+                        <p class="bubble-text"> {{ chatBubble.message }}</p>
+                    </div>
+                }
+                @if (chatBubble.senderType === senderTypeEnum.User) {
+                    <div class="chat-bubble user">
+                        <p class="bubble-text"> {{ chatBubble.message }}</p>
+                    </div>
+                }
+            }
+        </mat-card-content>
+
+        <mat-card-footer class="assistant-card-footer relative">
+            <div fxLayout="row" fxLayoutAlign="center center" >
+                <mat-form-field class="margin-top-15" appearance="outline" style="width: 90%">
+                    <textarea
+                        matInput
+                        placeholder="Ask a brief question..."
+                        class="textarea-user-input"
+                        cdkTextareaAutosize
+                        [cdkAutosizeMinRows]="1"
+                        [cdkAutosizeMaxRows]="3"
+                        maxlength="500"
+                        (keydown.enter)="sendMessageOnEnter($event)"
+                        [(ngModel)]="userInput"
+                    ></textarea>
+                    <button mat-icon-button matSuffix aria-label="Send message">
+                        <mat-icon class="text-primary"
+                                  (click)="sendMessageToAssistant()">send</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+
+            <!-- Hermes is typing...-->
+            @if (isAssistantTyping) {
+                <div class="hermes-is-typing-container">
+                    <p class="hermes-is-typing-text">Hermes is typing...</p>
+                </div>
+            }
+        </mat-card-footer>
+    </mat-card>
+}

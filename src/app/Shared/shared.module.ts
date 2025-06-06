@@ -6,10 +6,11 @@ import { MaterialModule } from "./modules/material.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { RouterModule } from "@angular/router";
 import { FilterComponent } from './components/filter/filter.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
 import { BookCopyComponent } from "../Library/book-copy/book-copy.component";
 import { UsersComponent } from "../admin/users/users.component";
+import { AssistantComponent } from './components/assistant/assistant.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { UsersComponent } from "../admin/users/users.component";
     AlertDialogComponent,
     BookCopyComponent, //Library
     UsersComponent, //Admin
+    AssistantComponent,
   ],
   imports: [
     CommonModule,
@@ -26,12 +28,14 @@ import { UsersComponent } from "../admin/users/users.component";
     FlexLayoutModule,
     RouterModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [
     LoadingCircleDirective,
     TreeComponent,
     FilterComponent,
     AlertDialogComponent,
+    AssistantComponent,
   ]
 })
 export class SharedModule {}

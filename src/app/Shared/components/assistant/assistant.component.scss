@@ -1,0 +1,98 @@
+@use "../../../../assets/styles/variables" as *;
+
+.assistant-circle-container {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.assistant-icon {
+  height: 100%;
+  width: 100%;
+}
+
+.assistant-header-container {
+  max-width: 75px;
+  max-height: 75px;
+}
+
+.bot {
+  padding: 5px 10px;
+  border: 1px solid $text-secondary;
+  border-radius: 50px;
+  margin-left: 10px;
+}
+
+.assistant-card {
+  width: 300px;
+  background-color: $background-default;
+  border: 2px solid $primary-dark;
+  box-shadow: 0 0 20px 2px rgba($primary-dark, 0.6);
+}
+
+.assistant-card-header {
+  padding: 5px;
+}
+
+.assistant-card-content {
+  padding: 5px;
+	padding-bottom: 30px;
+  height: 40vh;
+  overflow-y: auto;
+  background-color: $background-menu;
+}
+
+.close-chat {
+  margin-left: 65px;
+}
+
+.chat-bubble {
+  max-width: 80%;
+  padding: 5px;
+  margin: 5px;
+	margin-bottom: 10px;
+  border-radius: 18px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chat-bubble.assistant {
+  background-color: #e8efff;
+  color: #1a1a2e;
+  align-self: flex-start;
+}
+
+.user {
+  background-color: $accent-light;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.bubble-text {
+  margin: 5px;
+}
+
+.textarea-user-input {
+	color: $text-primary !important;
+	font-size: 0.8rem !important;
+  width: 100% !important;
+}
+
+::ng-deep input::placeholder,
+::ng-deep textarea::placeholder {
+  color: $text-primary !important;
+}
+
+.hermes-is-typing-container {
+	position: absolute;
+	top: -20px;
+	left: 5px;
+	font-size: 0.8rem;
+}
+
+.hermes-is-typing-text {
+	margin: 0;
+	color: $text-assistant-typing;
+	font-weight: bold;
+}

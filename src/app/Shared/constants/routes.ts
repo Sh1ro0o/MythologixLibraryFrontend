@@ -7,16 +7,16 @@ export const ROUTES = {
     DASHBOARD: '/dashboard',
 
     //Library
-    BOOKS: 'library/books',
-    AUTHORS: 'library/authors',
-    GENRES: 'library/genres',
-    BOOKCOPIES: 'library/bookcopies',
+    BOOKS: '/library/books',
+    AUTHORS: '/library/authors',
+    GENRES: '/library/genres',
+    BOOKCOPIES: '/library/bookcopies',
 
     //Activity
-    BORROWED: 'activity/borrowed',
-    RETURNED: 'activity/returned',
-    OVERDUE: 'activity/overdue',
+    BORROWED: '/activity/borrowed',
+    RETURNED: '/activity/returned',
+    OVERDUE: '/activity/overdue',
 
     //Admin
-    USERS: 'admin/users',
+    USERS: '/admin/users',
 }

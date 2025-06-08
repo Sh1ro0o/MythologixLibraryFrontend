@@ -25,10 +25,6 @@
   width: 225px;
 }
 
-.sidebar.mini-mode {
-  width: 60px;
-}
-
 .component-content-container {
   margin-top: 30px;
   margin-left: 15px;
@@ -51,4 +47,12 @@
 
 ::ng-deep .mat-mdc-menu-item mat-icon {
   color: $text-primary !important;
+}
+
+//Assistant
+.assistant-container {
+  position: fixed;
+  bottom: 5vh;
+  right: 3vh;
+  z-index: 1000;
 }

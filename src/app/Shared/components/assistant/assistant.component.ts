@@ -87,10 +87,8 @@ export class AssistantComponent implements OnInit, AfterViewChecked {
 
   //automatic scrolldown
   private scrollToBottom(): void {
-    try {
+    if (this.chatContainer?.nativeElement) {
       this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
-    } catch (err) {
-      console.error('Failed to scroll', err);
     }
   }
 }

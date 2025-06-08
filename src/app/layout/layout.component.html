@@ -1,5 +1,5 @@
-<!-- Toolbar -->
 <div class="layout-wrapper" fxLayout="column">
+  <!-- Toolbar -->
   <mat-toolbar class="toolbar">
     <button mat-icon-button class="example-icon" 
             aria-label="Example icon-button with menu icon"
@@ -24,18 +24,22 @@
       </button>
     </mat-menu>
   </mat-toolbar>
+  
   <!-- Main Content -->
   <mat-drawer-container class="main-content">
       <!-- Sidebar -->
-      <mat-drawer #drawer class="sidebar sidebar-default-mode" mode="side" [opened]="true">
+      <mat-drawer #drawer class="sidebar sidebar-default-mode" [mode]="sidenavMode" [opened]="sidenavOpened">
           <app-side-bar></app-side-bar>
       </mat-drawer>
 
       <!-- Component rendering -->
       <mat-drawer-content class="component-content-container">
           <div>
+              <!-- Main Components -->
               <router-outlet></router-outlet>
-              <app-assistant style="position: absolute; bottom: 5vh; right: 3vh;"></app-assistant>
+
+              <!-- Hermes AI Chat BOT -->
+              <app-assistant class="assistant-container"></app-assistant>
           </div>
       </mat-drawer-content>
   </mat-drawer-container>

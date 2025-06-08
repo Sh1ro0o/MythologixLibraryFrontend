@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "../shared/modules/material.module";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardComponent } from "./dashboard.component";
+import { RouterModule } from "@angular/router";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -14,6 +16,8 @@ import { DashboardComponent } from "./dashboard.component";
         ReactiveFormsModule,
         MaterialModule,
         FlexLayoutModule,
+        RouterModule,
+        SharedModule,
     ]
   })
   export class DashboardModule {}

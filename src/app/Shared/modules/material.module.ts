@@ -16,6 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [],
@@ -43,6 +44,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatChipsModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatGridListModule,
   ],
   exports: [
     MatCard,
@@ -68,6 +70,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatChipsModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatGridListModule,
   ]
 })
 export class MaterialModule { }

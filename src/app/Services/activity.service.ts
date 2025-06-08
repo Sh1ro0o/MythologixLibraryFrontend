@@ -7,6 +7,8 @@ import { toHttpParams } from "../shared/utils/http-utils";
 import { GetBorrowingTransactionRequest } from "../Models/Requests/get.borrowing-transaction.request";
 import { BorrowingTransactionData } from "../Models/data/borrowing-transaction-data";
 import { PostBorrowingTransactionRequest } from "../Models/Requests/post.borrowing-transaction.request";
+import { GetSeperateTransactionsCountRequest } from "../Models/Requests/get.seperate-transactions-count.request";
+import { SeperateTransactionsCountData } from "../Models/data/seperate-transactions-count-data";
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +22,10 @@ export class ActivityService {
   //GET
   getBorrowingTransctions(getBorrowingTransctions: GetBorrowingTransactionRequest): Observable<ResponseData<BorrowingTransactionData[]>> {
     return this.http.get<ResponseData<BorrowingTransactionData[]>>(this.apiUrl + '/BorrowingTransaction/allBorrowingTransactions', {params: toHttpParams(getBorrowingTransctions)});
+  }
+
+  getSeperateTransactionsCount(getSeperateTransactionsCount: GetSeperateTransactionsCountRequest): Observable<ResponseData<SeperateTransactionsCountData>> {
+    return this.http.get<ResponseData<SeperateTransactionsCountData>>(this.apiUrl + '/BorrowingTransaction/GetSeperateTransactionsCount', {params: toHttpParams(getSeperateTransactionsCount)});
   }
 
   //POST

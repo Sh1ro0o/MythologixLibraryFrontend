@@ -65,7 +65,7 @@ export class AddBorrowingTransactionDialogComponent implements OnInit {
     bookCopiesDialogRef.afterClosed().subscribe((resBookCopy: BookCopyData | null) => {
       if (resBookCopy) {
         this.selectedBookCopy = resBookCopy;
-        this.addBorrowingTransactionGroup.get('bookCopyId')?.setValue(this.selectedBookCopy.bookId);
+        this.addBorrowingTransactionGroup.get('bookCopyId')?.setValue(this.selectedBookCopy.recordId);
       }
     });
   }

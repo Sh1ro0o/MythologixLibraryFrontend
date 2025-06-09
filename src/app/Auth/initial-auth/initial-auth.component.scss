@@ -4,7 +4,8 @@
     background-image: url('/Images/mithologyx-login-background.png');
     background-size: cover; 
     background-position: center;  
-    background-attachment: fixed; 
+    background-attachment: fixed;
+    overflow: auto;
 }
 
 .logo-container {
@@ -15,5 +16,18 @@
 
     img {
         width: 15%;
+        min-width: 150px;
     }
+}
+
+@media screen and (max-width: 828px) {
+  .logo-container {
+    height: 25vh; /* reduce height on smaller screens */
+    align-items: center; /* center logo vertically */
+  }
+
+  .logo-container img {
+    width: 32%; /* make logo more prominent */
+    min-width: 120px; /* optional tweak for smaller devices */
+  }
 }

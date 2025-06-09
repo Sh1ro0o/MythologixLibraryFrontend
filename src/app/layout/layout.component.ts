@@ -14,13 +14,14 @@ export class LayoutComponent implements OnInit {
   routes = ROUTES;
   sidenavMode: 'over' | 'side' = 'side';
   sidenavOpened: boolean = true;
+  isShrinked: boolean = false;
 
   constructor(private localStorage: LocalStorageService,
               private router: Router
   ) { }
 
   ngOnInit(): void {
-    
+    this.setSidenavMode(window.innerWidth);
   }
 
   onLogout() {
@@ -37,9 +38,11 @@ export class LayoutComponent implements OnInit {
     if (width < 828) {
       this.sidenavMode = 'over';
       this.sidenavOpened = false;
+      this.isShrinked = true;
     } else {
       this.sidenavMode = 'side';
       this.sidenavOpened = true;
+      this.isShrinked = false;
     }
   }
 }

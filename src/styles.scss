@@ -112,6 +112,7 @@ html {
 
     .auth-card {
         width: 30%;
+        min-width: 275px;
         background: $background-default;
         color: $text-primary;
         padding: 16px;
@@ -206,7 +207,8 @@ button[disabled] {
 	border: 2px solid $primary-dark;
 	border-radius: 12px;
 	box-shadow: 0 0 20px 2px rgba($primary-dark, 0.6);
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding: 0;
 
   .mat-mdc-paginator-container {

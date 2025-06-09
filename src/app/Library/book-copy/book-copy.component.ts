@@ -11,7 +11,7 @@ import { FilterData } from '../../Models/data/filter-data';
 import { ResponseData } from '../../Models/Responses/response-data';
 import { LibraryService } from '../../services/library.service';
 import { LoadingService } from '../../services/loading.service';
-import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
+import { FilterTypeEnum } from '../../shared/enums/filter-type.enum';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../../shared/components/alert-dialog/alert-dialog.component';
 

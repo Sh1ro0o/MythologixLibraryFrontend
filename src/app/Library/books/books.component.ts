@@ -13,7 +13,7 @@ import { GenreData } from '../../Models/data/genre-data';
 import { ResponseData } from '../../Models/Responses/response-data';
 import { FilterData } from '../../Models/data/filter-data';
 import { FormControl } from '@angular/forms';
-import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
+import { FilterTypeEnum } from '../../shared/enums/filter-type.enum';
 import { GetGenresRequest } from '../../Models/Requests/get.genres.request';
 import { CustomKeyValue } from '../../Models/data/key-value';
 import { forkJoin, Observable } from 'rxjs';

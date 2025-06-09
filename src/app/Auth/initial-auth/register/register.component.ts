@@ -1,10 +1,10 @@
 import { Component, DestroyRef, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { containsNonAlphanumeric } from '../../../Validators/contains-non-alphanumeric.validators';
-import { containsUppercase } from '../../../Validators/contains-upper-case.validators';
-import { containsLowercase } from '../../../Validators/contains-lower-case.validators';
-import { containsDigit } from '../../../Validators/contains-digit.validators';
-import { stringsMatchValidator } from '../../../Validators/strings-match.validators';
+import { containsNonAlphanumeric } from '../../../validators/contains-non-alphanumeric.validators';
+import { containsUppercase } from '../../../validators/contains-upper-case.validators';
+import { containsLowercase } from '../../../validators/contains-lower-case.validators';
+import { containsDigit } from '../../../validators/contains-digit.validators';
+import { stringsMatchValidator } from '../../../validators/strings-match.validators';
 import { ROUTES } from '../../../shared/constants/routes';
 import { RegisterRequest } from '../../../Models/Requests/register.request';
 import { LoadingService } from '../../../services/loading.service';
@@ -14,7 +14,7 @@ import { withLoading } from '../../../core/operators/with-loading.operator';
 import { ResponseData } from '../../../Models/Responses/response-data';
 import { AuthData } from '../../../Models/data/auth-data';
 import { LocalStorageService } from '../../../services/local-storage.service';
-import { LocalStorageKey } from '../../../shared/Enums/local-storage-key.enum';
+import { LocalStorageKey } from '../../../shared/enums/local-storage-key.enum';
 import { Router } from '@angular/router';
 
 

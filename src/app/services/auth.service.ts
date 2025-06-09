@@ -5,11 +5,11 @@ import { LoginRequest } from '../Models/Requests/login.request';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
-import { LocalStorageKey } from '../shared/Enums/local-storage-key.enum';
+import { LocalStorageKey } from '../shared/enums/local-storage-key.enum';
 import { ResponseData } from '../Models/Responses/response-data';
 import { AuthData } from '../Models/data/auth-data';
 import { RegisterRequest } from '../Models/Requests/register.request';
-import { Role } from '../shared/Enums/role.enum';
+import { Role } from '../shared/enums/role.enum';
 
 @Injectable({
   providedIn: 'root',

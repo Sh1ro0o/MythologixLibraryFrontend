@@ -1,7 +1,7 @@
 import { Component, DestroyRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GetBorrowingTransactionRequest } from '../../Models/Requests/get.borrowing-transaction.request';
-import { BorrowingStatus } from '../../shared/Enums/borrowing-status.enum';
+import { BorrowingStatus } from '../../shared/enums/borrowing-status.enum';
 import { ActivityService } from '../../services/activity.service';
 import { withLoading } from '../../core/operators/with-loading.operator';
 import { LoadingService } from '../../services/loading.service';
@@ -13,7 +13,7 @@ import { FilterData } from '../../Models/data/filter-data';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
-import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
+import { FilterTypeEnum } from '../../shared/enums/filter-type.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { AddBorrowingTransactionDialogComponent } from './add-borrowing-transaction-dialog/add-borrowing-transaction-dialog.component';
 import { AlertDialogComponent } from '../../shared/components/alert-dialog/alert-dialog.component';

@@ -1,4 +1,4 @@
-import { SenderTypeEnum } from "../../shared/Enums/sender-type.enum";
+import { SenderTypeEnum } from "../../shared/enums/sender-type.enum";
 
 export class AssistantChatData {
     recordId?: number;

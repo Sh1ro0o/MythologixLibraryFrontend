@@ -11,7 +11,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
-import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
+import { FilterTypeEnum } from '../../shared/enums/filter-type.enum';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../../shared/components/alert-dialog/alert-dialog.component';
 

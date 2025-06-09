@@ -12,7 +12,7 @@ import { GetAuthorsRequest } from '../../Models/Requests/get.authors.request';
 import { ResponseData } from '../../Models/Responses/response-data';
 import { FilterData } from '../../Models/data/filter-data';
 import { FormControl } from '@angular/forms';
-import { FilterTypeEnum } from '../../shared/Enums/filter-type.enum';
+import { FilterTypeEnum } from '../../shared/enums/filter-type.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../../shared/components/alert-dialog/alert-dialog.component';
 

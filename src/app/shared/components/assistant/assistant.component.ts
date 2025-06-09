@@ -1,5 +1,5 @@
-import { AfterViewChecked, AfterViewInit, Component, DestroyRef, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { SenderTypeEnum } from '../../Enums/sender-type.enum';
+import { AfterViewChecked, Component, DestroyRef, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { SenderTypeEnum } from '../../enums/sender-type.enum';
 import { AssistantChatData } from '../../../Models/data/assistant-chat-data';
 import { ASSISTANT_CONSTS } from '../../constants/assistant-consts';
 import { AssistantService } from '../../../services/assistant.service';

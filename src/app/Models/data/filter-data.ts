@@ -1,5 +1,5 @@
 import { FormControl } from "@angular/forms";
-import { FilterTypeEnum } from "../../shared/Enums/filter-type.enum";
+import { FilterTypeEnum } from "../../shared/enums/filter-type.enum";
 import { CustomKeyValue } from "./key-value";
 
 export class FilterData {

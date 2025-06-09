@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginRequest } from '../../../Models/Requests/login.request';
 import { AuthService } from '../../../services/auth.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
-import { LocalStorageKey } from '../../../shared/Enums/local-storage-key.enum';
+import { LocalStorageKey } from '../../../shared/enums/local-storage-key.enum';
 import { Router } from '@angular/router';
 import { LoadingService } from '../../../services/loading.service';
 import { withLoading } from '../../../core/operators/with-loading.operator';

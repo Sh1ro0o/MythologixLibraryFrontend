@@ -1,6 +1,6 @@
 import { Component, effect, input, output, signal, WritableSignal } from '@angular/core';
 import { FilterData } from '../../../Models/data/filter-data';
-import { FilterTypeEnum } from '../../Enums/filter-type.enum';
+import { FilterTypeEnum } from '../../enums/filter-type.enum';
 import { FormControl } from '@angular/forms';
 import { CustomKeyValue } from '../../../Models/data/key-value';
 import { MatCheckboxChange } from '@angular/material/checkbox';

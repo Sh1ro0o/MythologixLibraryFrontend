@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { BorrowingTransactionComponent } from "./borrowing-transaction/borrowing-transaction.component";
-import { BorrowingStatus } from "../shared/Enums/borrowing-status.enum";
+import { BorrowingStatus } from "../shared/enums/borrowing-status.enum";
 
 const activityRoutes: Routes = [
   {

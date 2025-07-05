@@ -2,8 +2,6 @@ import { Component, DestroyRef, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginRequest } from '../../../Models/Requests/login.request';
 import { AuthService } from '../../../services/auth.service';
-import { LocalStorageService } from '../../../services/local-storage.service';
-import { LocalStorageKey } from '../../../shared/enums/local-storage-key.enum';
 import { Router } from '@angular/router';
 import { LoadingService } from '../../../services/loading.service';
 import { withLoading } from '../../../core/operators/with-loading.operator';
@@ -29,7 +27,6 @@ export class LogInComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private authService: AuthService,
-    private localStorage: LocalStorageService,
     private router: Router,
     public loadingService: LoadingService,
     private destroyRef: DestroyRef
@@ -55,9 +52,8 @@ export class LogInComponent implements OnInit {
       ).subscribe({
         next: (response: ResponseData<AuthData>) => {
           //store token data in local storage
-          this.localStorage.set(LocalStorageKey.Token, response?.data?.token);
-          this.localStorage.set(LocalStorageKey.Expiration, response?.data?.expiresOn);
-          this.localStorage.set(LocalStorageKey.Roles, response?.data?.roles);
+          this.authService.setRoles(response?.data?.roles ?? []);
+          this.authService.setIsLoggedIn(true);
 
           //redirect to dashbouard
           this.router.navigate(['dashboard']);

@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ROUTES } from '../shared/constants/routes';
-import { LocalStorageService } from '../services/local-storage.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -16,8 +16,9 @@ export class LayoutComponent implements OnInit {
   sidenavOpened: boolean = true;
   isShrinked: boolean = false;
 
-  constructor(private localStorage: LocalStorageService,
-              private router: Router
+  constructor(
+    private router: Router,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +26,7 @@ export class LayoutComponent implements OnInit {
   }
 
   onLogout() {
-    this.localStorage.clear();
+    this.authService.reset();
     this.router.navigate([this.routes.LOGIN]);
   }
 

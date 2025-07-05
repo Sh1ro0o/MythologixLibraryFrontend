@@ -13,8 +13,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { withLoading } from '../../../core/operators/with-loading.operator';
 import { ResponseData } from '../../../Models/Responses/response-data';
 import { AuthData } from '../../../Models/data/auth-data';
-import { LocalStorageService } from '../../../services/local-storage.service';
-import { LocalStorageKey } from '../../../shared/enums/local-storage-key.enum';
 import { Router } from '@angular/router';
 
 
@@ -37,7 +35,6 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private destroyRef: DestroyRef,
-    private localStorage: LocalStorageService,
     private router: Router,
     public loadingService: LoadingService,
   ) { }
@@ -67,9 +64,8 @@ export class RegisterComponent implements OnInit {
       ).subscribe({
         next: (response: ResponseData<AuthData>) => {
           //store token data in local storage
-          this.localStorage.set(LocalStorageKey.Token, response?.data?.token);
-          this.localStorage.set(LocalStorageKey.Expiration, response?.data?.expiresOn);
-          this.localStorage.set(LocalStorageKey.Roles, response?.data?.roles);
+          this.authService.setRoles(response?.data?.roles ?? []);
+          this.authService.setIsLoggedIn(true);
 
           //redirect to dashbouard
           this.router.navigate(['dashboard']);

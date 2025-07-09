@@ -74,8 +74,6 @@ export class BorrowingTransactionComponent implements OnInit {
       this.borrowingTransactionRequest.dueDate = new Date().toISOString();
       this.title = 'OVERDUE';
       break;
-    default:
-      //TODO: handle unknown ERROR
     }
 
     //main data GET

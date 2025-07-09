@@ -37,12 +37,11 @@
 						<!-- Checkbox Filter -->
 						@case (filterTypeEnum.Checkbox) {
 							<div fxLayout="column" fxLayoutAlign="center start">
-								<!-- Wrap checkboxes in a row wrap container -->
 								<div fxLayout="row wrap" fxLayoutGap="10px" class="margin-bot-20">
 									<label class="filter-label margin-left-10" [fxFlex]="100">{{ filterItem.name }}:</label>
 
 									@for (checkboxItem of filterItem.customKeyValue; track $index) {
-										<div fxFlex="40"> <!-- half width minus half gap -->
+										<div fxFlex="40">
 										<mat-checkbox
 											[checked]="isCheckboxChecked(filterItem.control, checkboxItem)"
 											(change)="onCheckboxChange($event, filterItem.control, checkboxItem)">

@@ -26,8 +26,14 @@ export class LayoutComponent implements OnInit {
   }
 
   onLogout() {
-    this.authService.reset();
-    this.router.navigate([this.routes.LOGIN]);
+    this.authService.logout().subscribe({
+      next: (isLoggedOut) => {
+        if (isLoggedOut) {
+          this.authService.reset();
+          this.router.navigate([this.routes.LOGIN]);
+        }
+      }
+    })
   }
 
   @HostListener('window:resize', ['$event'])

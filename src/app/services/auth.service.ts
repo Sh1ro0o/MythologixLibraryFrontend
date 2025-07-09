@@ -30,6 +30,10 @@ export class AuthService {
     return this.http.post<ResponseData<AuthData>>(this.apiUrl + '/User/Register', registerRequest);
   }
 
+  logout(): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/User/Logout', {});
+  }
+
   refreshSession(): Observable<ResponseData<AuthData>> {
     return this.http.post<ResponseData<AuthData>>(this.apiUrl + '/Auth/Refresh', {});
   }

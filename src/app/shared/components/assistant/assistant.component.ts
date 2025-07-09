@@ -33,9 +33,6 @@ export class AssistantComponent implements OnInit, AfterViewChecked {
   ) { }
 
   ngOnInit(): void {
-    //get history data of 1 day
-
-    //if no history data exists start with default message
     this.chatBubbles.push(new AssistantChatData(ASSISTANT_CONSTS.INTRODUCTION, SenderTypeEnum.Assistant));
   }
 

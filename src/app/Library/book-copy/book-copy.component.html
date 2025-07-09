@@ -37,10 +37,10 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Availability </th>
         <td mat-cell *matCellDef="let row">
           @if (row.isAvailable) {
-            <span class="error-icon" aria-label="No"><mat-icon class="margin-left-20">close</mat-icon></span>
+            <span class="success-icon" aria-label="Yes"><mat-icon class="margin-left-20">done</mat-icon></span>
           }
           @else {
-            <span class="success-icon" aria-label="Yes"><mat-icon class="margin-left-20">done</mat-icon></span>
+            <span class="error-icon" aria-label="No"><mat-icon class="margin-left-20">close</mat-icon></span>
           }
         </td>
       </ng-container>

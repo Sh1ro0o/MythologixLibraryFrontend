@@ -4,10 +4,9 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
-  HttpErrorResponse
-} from '@angular/common/http';
+  HttpErrorResponse} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, mergeMap, switchMap } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ROUTES } from '../../shared/constants/routes';
 import { AuthService } from '../../services/auth.service';
@@ -24,8 +23,8 @@ export class AuthResponseInterceptor implements HttpInterceptor {
         //If error Unauthorized
         if (error.status === 401) {
           return this.authService.refreshSession().pipe(
-            mergeMap(() => {
-              return next.handle(req);
+            switchMap(() => {
+                return next.handle(req);
             }),
             catchError((refreshError: HttpErrorResponse) => {
               this.authService.reset();

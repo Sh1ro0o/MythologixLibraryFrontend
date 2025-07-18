@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { LoginRequest } from '../Models/Requests/login.request';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, delay, finalize, Observable, Subject, take, tap } from 'rxjs';
 import { ResponseData } from '../Models/Responses/response-data';
 import { AuthData } from '../Models/data/auth-data';
 import { RegisterRequest } from '../Models/Requests/register.request';
@@ -17,6 +17,9 @@ export class AuthService {
   private apiUrl = environment.apiUrl;
   private isUserLoggedIn: boolean = false;
   private roles: string[] = [];
+
+  isRefreshing = false;
+  private refreshSubject = new Subject<ResponseData<AuthData>>();
 
   constructor(private http: HttpClient) { }
 
@@ -35,7 +38,23 @@ export class AuthService {
   }
 
   refreshSession(): Observable<ResponseData<AuthData>> {
-    return this.http.post<ResponseData<AuthData>>(this.apiUrl + '/Auth/Refresh', {});
+    if (this.isRefreshing) {
+      return this.refreshSubject.pipe(
+        take(1)
+      );
+    }
+
+    this.isRefreshing = true;
+    
+    return this.http.post<ResponseData<AuthData>>(this.apiUrl + '/Auth/Refresh', {})
+      .pipe(
+        tap((response: ResponseData<AuthData>) => {
+          this.refreshSubject.next(response);
+        }),
+        finalize(() => {
+          this.isRefreshing = false;
+        }),
+      );
   }
   
   setIsLoggedIn(status: boolean) {

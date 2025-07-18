@@ -29,7 +29,7 @@ export class FilterComponent {
 
   constructor() {
     //create new local array from input signal
-    effect(() => {
+    effect((onCleanup) => {
       const clonedFilters: FilterData[] = this.filterData().map(data => {
         const isCheckbox = data.type === FilterTypeEnum.Checkbox;
 
@@ -56,12 +56,14 @@ export class FilterComponent {
       clonedFilters.forEach(filter => {
       if (filter.type === FilterTypeEnum.String) {
           const control = filter.control as FormControl<string>;
-          control.valueChanges.subscribe(value => {
+          const sub = control.valueChanges.subscribe(value => {
             const trimmed = value?.trim() ?? '';
             if (value !== trimmed) {
               control.setValue(trimmed, { emitEvent: false });
             }
           });
+
+          onCleanup(() => sub.unsubscribe());
         }
       });
     });
@@ -153,24 +155,26 @@ export class FilterComponent {
   * - Emits updated filters to parent
   */
   removeChip(chipKey: string) {
-    //remove chip
-    this.filterChips.update(chipList =>
-      chipList.filter(x => x.key != chipKey)
-    );
+    //remove chip if exists
+    if (this.filterChips().some(x => x.key === chipKey)) {
+      this.filterChips.update(chipList =>
+        chipList.filter(x => x.key != chipKey)
+      );
 
-    //update filters
-    this.localFilters.update(filters => {
-      return filters.map(filter => {
-        if (filter.name === chipKey) {
-          filter.control.reset();
-        }
+      //update filters
+      this.localFilters.update(filters => {
+        return filters.map(filter => {
+          if (filter.name === chipKey) {
+            filter.control.reset();
+          }
 
-        return filter;
+          return filter;
+        });
       });
-    });
 
-    //notify parent
-    this.applyFilters.emit(this.localFilters());
+      //notify parent
+      this.applyFilters.emit(this.localFilters());
+    }
   }
 
   onCheckboxChange(event: MatCheckboxChange, control: FormControl, checkboxKeyValue: CustomKeyValue) {

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { LoginRequest } from '../Models/Requests/login.request';
 import { HttpClient } from '@angular/common/http';
-import { catchError, delay, finalize, Observable, Subject, take, tap } from 'rxjs';
+import { catchError, delay, finalize, Observable, Subject, take, tap, throwError } from 'rxjs';
 import { ResponseData } from '../Models/Responses/response-data';
 import { AuthData } from '../Models/data/auth-data';
 import { RegisterRequest } from '../Models/Requests/register.request';
@@ -48,8 +48,11 @@ export class AuthService {
     
     return this.http.post<ResponseData<AuthData>>(this.apiUrl + '/Auth/Refresh', {})
       .pipe(
-        tap((response: ResponseData<AuthData>) => {
-          this.refreshSubject.next(response);
+        tap(response => this.refreshSubject.next(response)),
+        catchError(err => {
+          console.log(err);
+          this.refreshSubject.error(err);
+          return throwError(() => err);
         }),
         finalize(() => {
           this.isRefreshing = false;

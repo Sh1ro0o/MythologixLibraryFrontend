@@ -24,7 +24,7 @@ export class AuthResponseInterceptor implements HttpInterceptor {
         if (error.status === 401) {
           return this.authService.refreshSession().pipe(
             switchMap(() => {
-                return next.handle(req);
+              return next.handle(req);
             }),
             catchError((refreshError: HttpErrorResponse) => {
               this.authService.reset();

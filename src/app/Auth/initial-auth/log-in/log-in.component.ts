@@ -75,7 +75,7 @@ export class LogInComponent implements OnInit {
 
   //Enter key pressed submit form
   @HostListener('window:keydown.enter', ['$event'])
-  handleEnterKey(event: KeyboardEvent) {
+  handleEnterKey(event: Event) {
     this.onSubmit();
   }
 }
